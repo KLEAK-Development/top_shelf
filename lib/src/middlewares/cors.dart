@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
+import 'package:shelf_helpers/src/internal/http_method.dart';
 
 /// A [Middleware] to add CORS to you endpoints
 Middleware cors({
@@ -19,7 +20,7 @@ Middleware cors({
             accessControlAllowHeaders.join(','),
         HttpHeaders.accessControlMaxAgeHeader: accessControlMaxAge,
       };
-      if (request.method == 'OPTIONS') {
+      if (request.method == HttpMethod.options.name.toUpperCase()) {
         return Response(
           HttpStatus.noContent,
           headers: headers,
