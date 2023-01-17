@@ -6,8 +6,8 @@ Middleware queryParameterValidator(
     {required bool required,
     required String name,
     required List<String> possibleValues}) {
-  return (Handler handler) {
-    return (Request request) async {
+  return (handler) {
+    return (request) async {
       if (required) {
         if (!request.url.queryParameters.containsKey(name) ||
             !possibleValues.contains(request.url.queryParameters[name])) {

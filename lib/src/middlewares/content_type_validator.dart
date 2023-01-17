@@ -5,8 +5,8 @@ import 'package:shelf_helpers/src/internal/body.dart';
 
 Middleware contentTypeValidator<T extends Body>(
     List<ContentType> supportedContentType) {
-  return (Handler handler) {
-    return (Request request) async {
+  return (handler) {
+    return (request) async {
       if (request.headers.containsKey(HttpHeaders.contentTypeHeader)) {
         final contentType =
             ContentType.parse(request.headers[HttpHeaders.contentTypeHeader]!);

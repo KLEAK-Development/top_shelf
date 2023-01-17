@@ -10,8 +10,8 @@ Middleware cors({
   List<String> accessControlAllowHeaders = const ['*'],
   int accessControlMaxAge = 86400,
 }) {
-  return (Handler handler) {
-    return (Request request) async {
+  return (handler) {
+    return (request) async {
       final headers = {
         HttpHeaders.accessControlAllowOriginHeader: accessControlAllowOrigin,
         HttpHeaders.accessControlAllowMethodsHeader:

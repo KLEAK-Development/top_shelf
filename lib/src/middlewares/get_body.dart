@@ -9,8 +9,8 @@ import 'package:xml2json/xml2json.dart';
 Middleware getBody<T extends Body>(
     T Function(Map<String, dynamic>) deserializer,
     {required String objectName}) {
-  return (Handler handler) {
-    return (Request request) async {
+  return (handler) {
+    return (request) async {
       try {
         if (!request.headers.containsKey(HttpHeaders.contentTypeHeader)) {
           return Response.badRequest();

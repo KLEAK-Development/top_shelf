@@ -6,8 +6,8 @@ import 'package:shelf_helpers/src/internal/request.dart';
 
 Middleware bodyFieldValidator<T extends Body>(
     String fieldName, bool Function(Object? value) validator) {
-  return (Handler handler) {
-    return (Request request) async {
+  return (handler) {
+    return (request) async {
       final body = request.get<T>();
       if (!validator(body.data[fieldName])) {
         return Response(HttpStatus.badRequest);
