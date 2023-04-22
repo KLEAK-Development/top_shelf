@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_helpers/src/internal/network_object.dart';
 
-Response generateResponse(Request request, NetworkObject object,
-    {int status = HttpStatus.ok,
-    String defaultContentType = 'application/json'}) {
+Response generateResponse(final Request request, final NetworkObject object,
+    {final int status = HttpStatus.ok,
+    final String defaultContentType = 'application/json'}) {
   var acceptHeader = ContentType.parse(
       request.headers[HttpHeaders.acceptHeader] ?? defaultContentType);
   if (request.headers[HttpHeaders.acceptHeader] == '*/*') {
     acceptHeader = ContentType.parse(defaultContentType);
   }
   if (acceptHeader.primaryType == 'application') {
-    if (acceptHeader.subType == 'json') {
+    if (acceptHeader.subType == 'json' && object is JsonNetworkObject) {
       return Response(
         status,
         body: object.toJsonString(),
@@ -20,7 +20,7 @@ Response generateResponse(Request request, NetworkObject object,
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-    } else if (acceptHeader.subType == 'xml') {
+    } else if (acceptHeader.subType == 'xml' && object is XmlNetworkObject) {
       return Response(
         status,
         body: object.toXmlString(),

@@ -9,7 +9,7 @@ enum TodoStatus {
   done,
 }
 
-class Todo extends NetworkObject {
+class Todo implements JsonNetworkObject, XmlNetworkObject {
   final int id;
   final String title;
   final DateTime createDate;
