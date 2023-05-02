@@ -1,9 +1,9 @@
 abstract class NetworkObject {}
 
-abstract class JsonNetworkObject extends NetworkObject {
+abstract class NetworkObjectToJson extends NetworkObject {
   String toJsonString();
 }
 
-abstract class XmlNetworkObject extends NetworkObject {
+abstract class NetworkObjectToXml extends NetworkObject {
   String toXmlString();
 }

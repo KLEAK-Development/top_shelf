@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 import '../utils.dart';
 
-class User implements JsonNetworkObject {
+class User implements NetworkObjectToJson {
   final String name;
   final int age;
 

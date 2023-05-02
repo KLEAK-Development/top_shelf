@@ -4,7 +4,7 @@ import 'package:shelf_helpers/shelf_helpers.dart';
 import 'package:shelf_helpers_example/src/models/network/todo.dart';
 import 'package:xml/xml.dart';
 
-class TodoList implements JsonNetworkObject, XmlNetworkObject {
+class TodoList implements NetworkObjectToJson, NetworkObjectToXml {
   final List<Todo> todos;
 
   TodoList(this.todos);

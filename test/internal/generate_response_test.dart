@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
-class User implements JsonNetworkObject, XmlNetworkObject {
+class User implements NetworkObjectToJson, NetworkObjectToXml {
   Map<String, dynamic> toJson() {
     return {
       'name': 'kleak',

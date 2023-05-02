@@ -11,9 +11,9 @@ Response generateResponse(final Request request, final NetworkObject object,
   final acceptAll = requestAccept.contains('*/*');
 
   if (acceptAll) {
-    if (object is JsonNetworkObject) {
+    if (object is NetworkObjectToJson) {
       return _jsonResponse(status, object);
-    } else if (object is XmlNetworkObject) {
+    } else if (object is NetworkObjectToXml) {
       return _xmlResponse(status, object);
     }
   }
@@ -27,11 +27,11 @@ Response generateResponse(final Request request, final NetworkObject object,
   for (final acceptHeader in acceptableHeader) {
     if (acceptHeader.primaryType == 'application' &&
         acceptHeader.subType == 'json' &&
-        object is JsonNetworkObject) {
+        object is NetworkObjectToJson) {
       return _jsonResponse(status, object);
     } else if (acceptHeader.primaryType == 'application' &&
         acceptHeader.subType == 'xml' &&
-        object is XmlNetworkObject) {
+        object is NetworkObjectToXml) {
       return _xmlResponse(status, object);
     }
   }
@@ -39,7 +39,7 @@ Response generateResponse(final Request request, final NetworkObject object,
   return Response.badRequest();
 }
 
-Response _jsonResponse(int status, JsonNetworkObject object) {
+Response _jsonResponse(int status, NetworkObjectToJson object) {
   return Response(
     status,
     body: object.toJsonString(),
@@ -49,7 +49,7 @@ Response _jsonResponse(int status, JsonNetworkObject object) {
   );
 }
 
-Response _xmlResponse(int status, XmlNetworkObject object) {
+Response _xmlResponse(int status, NetworkObjectToXml object) {
   return Response(
     status,
     body: object.toXmlString(),
