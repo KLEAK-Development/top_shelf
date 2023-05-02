@@ -5,9 +5,9 @@ import 'package:shelf_helpers/src/internal/network_object.dart';
 
 Response generateResponse(final Request request, final NetworkObject object,
     {final int status = HttpStatus.ok,
-    final String defaultContentType = 'application/json'}) {
+    final String defaultAcceptHeader = '*/*)'}) {
   final requestAccept =
-      request.headers[HttpHeaders.acceptHeader] ?? defaultContentType;
+      request.headers[HttpHeaders.acceptHeader] ?? defaultAcceptHeader;
   final acceptAll = requestAccept.contains('*/*');
 
   if (acceptAll) {
@@ -54,7 +54,7 @@ Response _xmlResponse(int status, XmlNetworkObject object) {
     status,
     body: object.toXmlString(),
     headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.contentTypeHeader: 'application/xml',
     },
   );
 }

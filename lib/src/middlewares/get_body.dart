@@ -6,8 +6,7 @@ import 'package:shelf_helpers/src/internal/body.dart';
 import 'package:shelf_helpers/src/internal/request.dart';
 import 'package:xml2json/xml2json.dart';
 
-Middleware getBody<T extends Body>(
-    T Function(Map<String, dynamic>) deserializer,
+Middleware getBody<T extends Body>(T Function(dynamic) deserializer,
     {required String objectName}) {
   return (handler) {
     return (request) async {
@@ -20,14 +19,16 @@ Middleware getBody<T extends Body>(
         dynamic /* List<dynamic> | Map<String, dynamic> */ content;
         if (requestContentType.primaryType == 'application') {
           if (requestContentType.subType == 'json') {
-            content = json.decode(getJsonContent(await request.readAsString()));
+            content = getJsonContent(await request.readAsString());
           } else if (requestContentType.subType == 'xml') {
             content = getXmlContent(await request.readAsString(), objectName);
+          } else if (requestContentType.subType == 'x-www-form-urlencoded') {
+            content = getFormUrlencoded(await request.readAsString());
           } else {
-            return Response(HttpStatus.badRequest);
+            return Response.badRequest();
           }
         } else {
-          return Response(HttpStatus.badRequest);
+          return Response.badRequest();
         }
         final body = deserializer(content);
         return handler(request.set<T>(() => body));
@@ -37,6 +38,11 @@ Middleware getBody<T extends Body>(
     };
   };
 }
+
+dynamic getFormUrlencoded(String content) => Map.fromEntries(content
+    .split('&')
+    .map((e) => e.split('='))
+    .map((e) => MapEntry(e.first, num.tryParse(e.last) ?? e.last)));
 
 dynamic getJsonContent(String content) => json.decode(content);
 

@@ -1,6 +1,6 @@
 name: shelf_helpers
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: Some helpers to ease the use of shelf
+version: 0.9.0
 # homepage: https://www.example.com
 
 environment:
@@ -13,3 +13,5 @@ dependencies:
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.16.0
+  xml: ^6.2.2
+

@@ -1,7 +1,8 @@
 import 'package:shelf/shelf.dart';
+import 'package:shelf_helpers/shelf_helpers.dart';
 import 'package:shelf_helpers/src/internal/request.dart';
 
-Middleware provider<T extends Object>(
+Middleware provide<T extends Object>(
   T Function(Request request) create,
 ) {
   return (handler) {

@@ -24,19 +24,34 @@ extension RequestGet on Request {
     if (value == null) {
       throw StateError(
         '''
-context.read<$T>() called with a request context that does not contain a $T.
+request.get<$T>() called with a request context that does not contain a $T.
 This can happen if $T was not provided to the request context.
 
 Here is an example on how to provide a String
   ```dart
   // _middleware.dart
-  WolfHandler middleware(WolfHandler handler) {
-    return handler.use(provider<String>((context) => "Hello world!");
+  Middleware middleware(String value) {
+    return (handler) {
+      return (request) async {
+        return handler(request.set(() => value));
+      };
+    };
   }
   ```
 ''',
       );
     }
     return (value as T Function())();
+  }
+}
+
+extension RequestGetPathParameter on Request {
+  String getPathParameter(String key) {
+    final params = (context['shelf_router/params'] as Map<String, String>?) ??
+        <String, String>{};
+    if (!params.containsKey(key)) {
+      throw 'oops';
+    }
+    return params[key]!;
   }
 }

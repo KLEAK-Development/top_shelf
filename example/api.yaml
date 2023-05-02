@@ -1,0 +1,219 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://localhost:8080'
+info:
+  title: Todo API
+  description: Todo API
+  version: 1.0.0
+  termsOfService: 'https://test/terms/'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: tasks
+    description: Tasks
+paths:
+  /:
+    get:
+      summary: Health check
+      description: |
+        Health check to see if server is up and available.
+      operationId: healthCheck
+      responses:
+        '200':
+          description: server is up
+  /todos:
+    get:
+      tags:
+        - tasks
+      summary: List the available tasks
+      description: |
+        The list of tasks can be filtered by their status.
+      operationId: listTodos
+      parameters:
+        - name: status
+          in: query
+          description: Filters the tasks by their status
+          required: false
+          schema:
+            type: string
+            enum:
+              - done
+              - waiting
+              - working
+              - all
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/TodoList'
+        '400':
+          description: Invalid status value
+    post:
+      tags:
+        - tasks
+      summary: Create a todo
+      description: ''
+      operationId: createTodo
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '400':
+          description: Invalid input
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodo'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/CreateTodo'
+  '/todos/{todoId}':
+    put:
+      tags:
+        - tasks
+      summary: Update the todo
+      description: |
+        Update the todo title and status
+      operationId: updateTodo
+      parameters:
+        - name: todoId
+          in: path
+          description: The todo identifier
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '400':
+          description: |
+           Invalid input
+        '404':
+          description: |
+            The todo does not exist.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+
+    delete:
+      tags:
+        - tasks
+      summary: Delete the todo
+      description: |
+        Delete the todo
+      operationId: deleteTodo
+      parameters:
+        - name: todoId
+          in: path
+          description: The todo identifier
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: |
+            No content.
+        '404':
+          description: |
+            The todo does not exist.
+security: []
+#- todo_auth: []
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
+components:
+  securitySchemes: {}
+
+  schemas:
+    TodoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Todo'
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: false
+          description: The todo identifier
+        title:
+          type: string
+          nullable: false
+          description: The todo title
+        createDate:
+          type: string
+          nullable: false
+          format: date-time
+          description: The todo creation date
+        doneDate:
+          type: string
+          format: date-time
+          description: The todo resolution date
+        status:
+          type: string
+          nullable: false
+          description: The todo state
+          enum:
+            - waiting
+            - working
+            - done
+      required:
+        - id
+        - title
+        - status
+        - createDate
+      example:
+        id: 23
+        title: Make the FOSDEM presentation
+        status: working
+        createDate: '2017-12-24T00:00:00.000Z'
+    CreateTodo:
+      type: object
+      title: CreateTodo
+      properties:
+        title:
+          description: The todo title
+          type: string
+          minLength: 5
+          example: This is my first todo
+      required:
+        - title
+    UpdateTodo:
+      type: object
+      title: UpdateTodo
+      required:
+        - title
+        - status
+      properties:
+        title:
+          description: The todo title
+          type: string
+        status:
+          description: The todo status
+          type: string
+          enum:
+            - working
+            - waiting
+            - done

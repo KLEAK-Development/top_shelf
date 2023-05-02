@@ -8,5 +8,6 @@ export 'package:shelf_helpers/src/internal/network_object.dart';
 export 'package:shelf_helpers/src/middlewares/body_field_validator.dart';
 export 'package:shelf_helpers/src/middlewares/content_type_validator.dart';
 export 'package:shelf_helpers/src/middlewares/get_body.dart';
+export 'package:shelf_helpers/src/middlewares/parse_body.dart';
 export 'package:shelf_helpers/src/middlewares/provide_path_param.dart';
 export 'package:shelf_helpers/src/middlewares/query_parameter_validator.dart';
