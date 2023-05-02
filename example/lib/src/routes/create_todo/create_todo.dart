@@ -7,7 +7,7 @@ import 'package:sqlite3/sqlite3.dart';
 Todo handler(Request request, PostTodo createTodo) {
   final database = request.get<Database>();
   final results = database.select(
-    'INSERT INTO todos (title, createDate, doneDate, status) VALUES (?, ?, ?, ?) RETURNING (id, title, createDate, doneDate, status)',
+    'INSERT INTO todos (title, createDate, doneDate, status) VALUES (?, ?, ?, ?) RETURNING id, title, createDate, doneDate, status',
     [
       createTodo.title,
       DateTime.now().toUtc().toIso8601String(),
