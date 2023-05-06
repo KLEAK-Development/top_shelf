@@ -2,7 +2,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_helpers/shelf_helpers.dart';
 import 'package:shelf_helpers_example/src/models/network/put/put_todo_body.dart';
 import 'package:shelf_helpers_example/src/models/network/todo_id_path_parameters.dart';
-import 'package:shelf_helpers_example/src/routes/update_todo/update_todo.dart'
+import 'package:shelf_helpers_example/src/routes/todos/update_todo/update_todo.dart'
     as update_todo;
 
 Response handler(Request request) {

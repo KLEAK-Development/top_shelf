@@ -7,7 +7,7 @@ Future<Response> makeRequest(
   String? body,
   Map<String, String>? headers,
 }) =>
-    Future.sync(
+    Future(
       () => handler(
         Request(
           method,

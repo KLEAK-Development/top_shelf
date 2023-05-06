@@ -40,21 +40,27 @@ Response generateResponse(final Request request, final NetworkObject object,
 }
 
 Response _jsonResponse(int status, NetworkObjectToJson object) {
+  final contentType =
+      object is BadRequest ? 'application/problem+json' : 'application/json';
+
   return Response(
-    status,
+    object is BadRequest ? HttpStatus.badRequest : status,
     body: object.toJsonString(),
     headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.contentTypeHeader: contentType,
     },
   );
 }
 
 Response _xmlResponse(int status, NetworkObjectToXml object) {
+  final contentType =
+      object is BadRequest ? 'application/problem+xml' : 'application/xml';
+
   return Response(
-    status,
+    object is BadRequest ? HttpStatus.badRequest : status,
     body: object.toXmlString(),
     headers: {
-      HttpHeaders.contentTypeHeader: 'application/xml',
+      HttpHeaders.contentTypeHeader: contentType,
     },
   );
 }

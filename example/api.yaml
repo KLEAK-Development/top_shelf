@@ -67,6 +67,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Todo'
         '400':
           description: Invalid input
       requestBody:
@@ -77,6 +80,13 @@ paths:
           application/xml:
             schema:
               $ref: '#/components/schemas/CreateTodo'
+          application/x-www-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Todo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Todo'
+
   '/todos/{todoId}':
     put:
       tags:
@@ -100,6 +110,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Todo'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Todo'
+
         '400':
           description: |
            Invalid input
@@ -112,6 +126,12 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateTodo'
           application/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+          application/x-www-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/UpdateTodo'
 
@@ -210,6 +230,7 @@ components:
         title:
           description: The todo title
           type: string
+          minLength: 5
         status:
           description: The todo status
           type: string

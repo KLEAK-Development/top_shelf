@@ -3,8 +3,8 @@ import 'package:shelf_helpers/shelf_helpers.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 Middleware checkTodoWithIdExist<T extends Object>() {
-  return (Handler handler) {
-    return (Request request) {
+  return (handler) {
+    return (request) {
       final todoId = request.get<T>();
       final database = request.get<Database>();
       var results =
