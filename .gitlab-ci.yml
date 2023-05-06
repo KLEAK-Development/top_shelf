@@ -70,7 +70,7 @@ lint-test:
     - .use-pub-cache-bin
     - .download-cache
   script:
-    - dart analyze .
+    - dart analyze lib/ test/
 
 format-test:
   stage: test
