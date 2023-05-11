@@ -7,5 +7,6 @@ void main(List<String> arguments) {
     print(record);
   });
 
-  server();
+  const port = 8080;
+  server(port: port);
 }

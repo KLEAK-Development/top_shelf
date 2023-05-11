@@ -7,7 +7,7 @@ repository: https://gitlab.com/sakemaer/shelf_helpers
 issue_tracker: https://gitlab.com/sakemaer/shelf_helpers/-/issues
 
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   logging: ^1.1.1
