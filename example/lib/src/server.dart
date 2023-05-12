@@ -10,9 +10,9 @@ Future<HttpServer> server(
   final future = shelf_io.serve(router, notNullableAddress, port);
 
   var readableAddress = switch (notNullableAddress) {
-    InternetAddress(address: var address) when address == '0.0.0.0' =>
+    InternetAddress(address: final address) when address == '0.0.0.0' =>
       'localhost',
-    InternetAddress(address: var address) => address,
+    InternetAddress(address: final address) => address,
   };
 
   Logger.root.fine('server listening on http://$readableAddress:$port');
