@@ -19,13 +19,24 @@ class Todo implements NetworkObjectToJson, NetworkObjectToXml {
   Todo(this.id, this.title, this.createDate, this.doneDate, this.status);
 
   factory Todo.fromJson(Map<String, dynamic> json) {
-    return Todo(
-      json['id'],
-      json['title'],
-      DateTime.parse(json['createDate']),
-      json['doneDate'] != null ? DateTime.parse(json['doneDate']) : null,
-      TodoStatus.values.firstWhere((element) => element.name == json['status']),
-    );
+    if (json
+        case {
+          'id': final int id,
+          'title': final String title,
+          'createDate': final String createDate,
+          'doneDate': final String? doneDate,
+          'status': final String status
+        }) {
+      return Todo(
+        id,
+        title,
+        DateTime.parse(createDate),
+        doneDate != null ? DateTime.parse(doneDate) : null,
+        TodoStatus.values.firstWhere((element) => element.name == status),
+      );
+    } else {
+      throw FormatException('Unexpected JSON');
+    }
   }
 
   Map<String, dynamic> toJson() {

@@ -1,16 +1,18 @@
 import 'dart:convert';
 
-abstract class NetworkObject {}
+import 'package:xml/xml.dart';
 
-abstract class NetworkObjectToJson extends NetworkObject {
+sealed class NetworkObject {}
+
+abstract interface class NetworkObjectToJson extends NetworkObject {
   String toJsonString();
 }
 
-abstract class NetworkObjectToXml extends NetworkObject {
+abstract interface class NetworkObjectToXml extends NetworkObject {
   String toXmlString();
 }
 
-class BadRequest extends NetworkObjectToJson {
+final class BadRequest implements NetworkObjectToJson, NetworkObjectToXml {
   final String type;
   final String title;
   final String details;
@@ -34,4 +36,32 @@ class BadRequest extends NetworkObjectToJson {
 
   @override
   String toJsonString() => json.encode(toJson());
+
+  @override
+  String toXmlString() {
+    final builder = XmlBuilder();
+    builder.element('BadRequest', nest: () {
+      builder.element('type', nest: () {
+        builder.text(type);
+      });
+      builder.element('title', nest: () {
+        builder.text(title);
+      });
+      builder.element('details', nest: () {
+        builder.text(details);
+      });
+      builder.element('status', nest: () {
+        builder.text(status);
+      });
+      builder.element('instance', nest: () {
+        builder.text(instance);
+      });
+      if (field != null) {
+        builder.element('field', nest: () {
+          builder.text(field!);
+        });
+      }
+    });
+    return builder.buildDocument().toXmlString();
+  }
 }

@@ -12,6 +12,13 @@ import 'package:xml2json/xml2json.dart';
 
 final _logger = Logger('SHELF_HELPERS');
 
+/// [getBody] parse the body based on Content-Type automatically
+///
+/// currently supported content-type are:
+/// - application/json
+/// - application/xml
+/// - application/x-www-form-urlencoded
+/// - multipart/form-data
 Middleware getBody<T extends Body>(T Function(dynamic) deserializer,
     {required String objectName}) {
   return (handler) {

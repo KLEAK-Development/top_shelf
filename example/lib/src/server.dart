@@ -9,7 +9,7 @@ Future<HttpServer> server(
   final notNullableAddress = address ?? InternetAddress.anyIPv4;
   final future = shelf_io.serve(router, notNullableAddress, port);
 
-  var readableAddress = switch (notNullableAddress) {
+  final readableAddress = switch (notNullableAddress) {
     InternetAddress(address: final address) when address == '0.0.0.0' =>
       'localhost',
     InternetAddress(address: final address) => address,

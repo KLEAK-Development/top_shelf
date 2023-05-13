@@ -4,6 +4,9 @@ import 'package:shelf_helpers/src/internal/generate_response.dart';
 import 'package:shelf_helpers/src/internal/network_object.dart';
 import 'package:shelf_helpers/src/internal/request.dart';
 
+/// [bodyValidator] is a flexible validator that allow you to check whatever
+/// you need on the body
+/// if validator failed return [BadRequest] response
 Middleware bodyValidator<T extends Body>(
     bool Function(Object? value) validator) {
   return (handler) {
@@ -24,6 +27,8 @@ Middleware bodyValidator<T extends Body>(
   };
 }
 
+/// [bodyFieldIsRequired] check if the [fieldName] is present in the body
+/// if check failed return [BadRequest] response
 Middleware bodyFieldIsRequired<B extends Body>(String fieldName) {
   return (handler) {
     return (request) {
@@ -52,6 +57,8 @@ Middleware bodyFieldIsRequired<B extends Body>(String fieldName) {
   };
 }
 
+/// [bodyFieldIsType] check if the [fieldName] is type T
+/// if check failed return [BadRequest] response
 Middleware bodyFieldIsType<B extends Body, T>(String fieldName) {
   return (handler) {
     return (request) {
@@ -80,6 +87,8 @@ Middleware bodyFieldIsType<B extends Body, T>(String fieldName) {
   };
 }
 
+/// [bodyFieldMinLength] check if the [fieldName] length is at least [minLength]
+/// if check failed return [BadRequest] response
 Middleware bodyFieldMinLength<B extends Body>(String fieldName, int minLength) {
   return (handler) {
     return (request) {
@@ -109,6 +118,8 @@ Middleware bodyFieldMinLength<B extends Body>(String fieldName, int minLength) {
   };
 }
 
+/// [bodyFieldMinLength] check if the [fieldName] length is under [maxLength]
+/// if check failed return [BadRequest] response
 Middleware bodyFieldMaxLength<B extends Body>(String fieldName, int maxLength) {
   return (handler) {
     return (request) {
@@ -138,6 +149,8 @@ Middleware bodyFieldMaxLength<B extends Body>(String fieldName, int maxLength) {
   };
 }
 
+/// [bodyFieldAllowedValues] check if the [fieldName] value is allowed base on [allowedValues]
+/// if check failed return [BadRequest] response
 Middleware bodyFieldAllowedValues<B extends Body>(
     String fieldName, List<String> allowedValues) {
   return (handler) {
@@ -168,6 +181,8 @@ Middleware bodyFieldAllowedValues<B extends Body>(
   };
 }
 
+/// [bodyFieldValidator] run [validator] on the field [fieldName]
+/// if validator failed return [BadRequest] response
 Middleware bodyFieldValidator<T extends Body>(
     String fieldName, bool Function(Object? value) validator) {
   return (handler) {

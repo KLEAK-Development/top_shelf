@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_helpers/src/internal/network_object.dart';
 
+/// Allow you to easily generate response based on accept header
+/// [object] is the object that will be serialized
+/// you can specify the status code by changing [status]
+/// [defaultAcceptHeader] is used only if the request doesn't have accept header
 Response generateResponse(final Request request, final NetworkObject object,
     {final int status = HttpStatus.ok,
     final String defaultAcceptHeader = '*/*)'}) {
@@ -11,11 +15,10 @@ Response generateResponse(final Request request, final NetworkObject object,
   final acceptAll = requestAccept.contains('*/*');
 
   if (acceptAll) {
-    if (object is NetworkObjectToJson) {
-      return _jsonResponse(status, object);
-    } else if (object is NetworkObjectToXml) {
-      return _xmlResponse(status, object);
-    }
+    return switch (object) {
+      NetworkObjectToJson _ => _jsonResponse(status, object),
+      NetworkObjectToXml _ => _xmlResponse(status, object),
+    };
   }
 
   final splitRequestAccept = requestAccept.split(';');
@@ -40,11 +43,17 @@ Response generateResponse(final Request request, final NetworkObject object,
 }
 
 Response _jsonResponse(int status, NetworkObjectToJson object) {
-  final contentType =
-      object is BadRequest ? 'application/problem+json' : 'application/json';
+  final contentType = switch (object) {
+    BadRequest _ => 'application/problem+json',
+    NetworkObjectToJson _ => 'application/json',
+  };
+  final statusCode = switch (object) {
+    BadRequest _ => HttpStatus.badRequest,
+    _ => status,
+  };
 
   return Response(
-    object is BadRequest ? HttpStatus.badRequest : status,
+    statusCode,
     body: object.toJsonString(),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,
@@ -53,11 +62,17 @@ Response _jsonResponse(int status, NetworkObjectToJson object) {
 }
 
 Response _xmlResponse(int status, NetworkObjectToXml object) {
-  final contentType =
-      object is BadRequest ? 'application/problem+xml' : 'application/xml';
+  final contentType = switch (object) {
+    BadRequest _ => 'application/problem+xml',
+    NetworkObjectToXml _ => 'application/xml',
+  };
+  final statusCode = switch (object) {
+    BadRequest _ => HttpStatus.badRequest,
+    _ => status,
+  };
 
   return Response(
-    object is BadRequest ? HttpStatus.badRequest : status,
+    statusCode,
     body: object.toXmlString(),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,

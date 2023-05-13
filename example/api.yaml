@@ -5,16 +5,19 @@ info:
   title: Todo API
   description: Todo API
   version: 1.0.0
-  termsOfService: 'https://test/terms/'
+  contact:
+    email: kevin@sakemaer.fr
   license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    name: MIT
+    url: 'https://gitlab.com/sakemaer/shelf_helpers/-/blob/main/LICENSE'
 tags:
-  - name: tasks
-    description: Tasks
+  - name: healthcheck
+  - name: todos
 paths:
   /:
     get:
+      tags:
+        - healthcheck
       summary: Health check
       description: |
         Health check to see if server is up and available.
@@ -25,7 +28,7 @@ paths:
   /todos:
     get:
       tags:
-        - tasks
+        - todos
       summary: List the available tasks
       description: |
         The list of tasks can be filtered by their status.
@@ -56,9 +59,9 @@ paths:
           description: Invalid status value
     post:
       tags:
-        - tasks
+        - todos
       summary: Create a todo
-      description: ''
+      description: 'create a todo'
       operationId: createTodo
       responses:
         '201':
@@ -86,11 +89,23 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/Todo'
+    delete:
+      tags:
+        - todos
+      operationId: deleteAllTodo
+      description: 'delete all todo from database'
+      security:
+        - BasicAuth: []
+        - BearerAuth: []
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: 'delete all todo'
 
   '/todos/{todoId}':
     put:
       tags:
-        - tasks
+        - todos
       summary: Update the todo
       description: |
         Update the todo title and status
@@ -137,7 +152,7 @@ paths:
 
     delete:
       tags:
-        - tasks
+        - todos
       summary: Delete the todo
       description: |
         Delete the todo
@@ -158,12 +173,21 @@ paths:
           description: |
             The todo does not exist.
 security: []
-#- todo_auth: []
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
 components:
-  securitySchemes: {}
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    BearerAuth:
+      type: http
+      scheme: bearer
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: X-API-KEY  # name of the header, query parameter or cookie
 
   schemas:
     TodoList:

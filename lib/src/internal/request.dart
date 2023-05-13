@@ -3,7 +3,9 @@ import 'package:shelf/shelf.dart';
 const _providersKey = 'providers';
 
 extension RequestSet on Request {
-  Request set<T extends Object>(T Function() create) {
+  /// set a function to create a lazy value [T]
+  /// use it before using request.get<T>()
+  Request set<T>(T Function() create) {
     final providers = context[_providersKey] as Map<String, dynamic>? ?? {};
     return change(
       context: {
@@ -18,6 +20,8 @@ extension RequestSet on Request {
 }
 
 extension RequestGet on Request {
+  /// get [T] from the context
+  /// use it after using request.set<T>()
   T get<T>() {
     final providers = (context[_providersKey] as Map<String, dynamic>?) ?? {};
     final value = providers['$T'];
@@ -46,6 +50,7 @@ Here is an example on how to provide a String
 }
 
 extension RequestGetPathParameter on Request {
+  /// get value of the query parameter [key] in the shelf_router/params context
   String getPathParameter(String key) {
     final params = (context['shelf_router/params'] as Map<String, String>?) ??
         <String, String>{};

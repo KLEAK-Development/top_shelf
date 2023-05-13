@@ -19,6 +19,10 @@ import 'package:shelf_helpers_example/src/routes/todos/update_todo/handler.dart'
     as update_todo;
 import 'package:shelf_helpers_example/src/routes/todos/update_todo/middleware.dart'
     as update_todo;
+import 'package:shelf_helpers_example/src/routes/todos/delete_all_todo/handler.dart'
+    as delete_all_todo;
+import 'package:shelf_helpers_example/src/routes/todos/delete_all_todo/middleware.dart'
+    as delete_all_todo;
 import 'package:shelf_router/shelf_router.dart';
 import 'package:sqlite3/sqlite3.dart';
 
@@ -42,6 +46,12 @@ final todos = Pipeline()
           Pipeline()
               .addMiddleware(create_todo.middleware())
               .addHandler(create_todo.handler),
+        )
+        ..delete(
+          '/',
+          Pipeline()
+              .addMiddleware(delete_all_todo.middleware())
+              .addHandler(delete_all_todo.handler),
         )
         ..put(
           '/<$todoIdPathParameterKey|\\d+>',

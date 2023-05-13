@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:shelf_helpers_example/src/models/network/post/post_todo.dart';
 import 'package:shelf_helpers_example/src/models/network/post/post_todo_body.dart';
 
 Middleware middleware() => Pipeline()
@@ -16,4 +17,5 @@ Middleware middleware() => Pipeline()
     .addMiddleware(bodyFieldIsRequired<PostTodoBody>('title'))
     .addMiddleware(bodyFieldIsType<PostTodoBody, String>('title'))
     .addMiddleware(bodyFieldMinLength<PostTodoBody>('title', 5))
+    .addMiddleware(parseBody<PostTodo, PostTodoBody>())
     .middleware;

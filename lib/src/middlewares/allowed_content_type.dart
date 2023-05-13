@@ -5,6 +5,9 @@ import 'package:shelf_helpers/src/internal/body.dart';
 import 'package:shelf_helpers/src/internal/generate_response.dart';
 import 'package:shelf_helpers/src/internal/network_object.dart';
 
+/// [allowedContentType] check if the content-type in the request is part of
+/// the [supportedContentType] that your endpoint support
+/// else return [BadRequest]
 Middleware allowedContentType<T extends Body>(
     List<ContentType> supportedContentType) {
   return (handler) {

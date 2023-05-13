@@ -45,24 +45,11 @@ class TodosRepository {
     return results;
   }
 
-  ResultSet complete(int id, String title, String status) {
-    var results = database.select(
-      'SELECT id, title, status, createDate, doneDate FROM todos WHERE id = ?',
-      [id],
-    );
-    final status = results.first['status'] as String?;
-    final doneDate = results.first['doneDate'] as String?;
-    if (status == 'done') {
-      return results;
-    }
-    results = database.select(
-      'UPDATE todos SET title = ?, status = ?, doneDate = ? WHERE id = ? RETURNING id, title, createDate, doneDate, status',
-      [title, status, doneDate ?? DateTime.now().toUtc().toIso8601String(), id],
-    );
-    return results;
-  }
-
   void delete(int id) {
     database.select('DELETE FROM todos WHERE id = ?', [id]);
+  }
+
+  void deleteAll() {
+    database.select('DELETE FROM todos');
   }
 }

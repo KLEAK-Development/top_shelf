@@ -5,5 +5,5 @@ class PostTodoBody extends Body<PostTodo> {
   PostTodoBody(super.data);
 
   @override
-  PostTodo parse() => PostTodo(data['title']);
+  PostTodo parse() => PostTodo.fromJson(data);
 }
