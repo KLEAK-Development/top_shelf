@@ -8,10 +8,13 @@ import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
 class User implements NetworkObjectToJson, NetworkObjectToXml {
+  final String name = 'kleak';
+  final int age = 25;
+
   Map<String, dynamic> toJson() {
     return {
-      'name': 'kleak',
-      'age': 25,
+      'name': name,
+      'age': age,
     };
   }
 
@@ -23,10 +26,10 @@ class User implements NetworkObjectToJson, NetworkObjectToXml {
     final builder = XmlBuilder();
     builder.element('User', nest: () {
       builder.element('name', nest: () {
-        builder.text('kleak');
+        builder.text(name);
       });
       builder.element('age', nest: () {
-        builder.text(25);
+        builder.text(age.toString());
       });
     });
     return builder.buildDocument().toXmlString();
