@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/network_object.dart';
+import 'package:top_shelf/src/internal/network_object.dart';
 
 /// Allow you to easily generate response based on accept header
 /// [object] is the object that will be serialized

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/http_method.dart';
+import 'package:top_shelf/src/internal/http_method.dart';
 
 /// A [Middleware] to add CORS
 Middleware cors({

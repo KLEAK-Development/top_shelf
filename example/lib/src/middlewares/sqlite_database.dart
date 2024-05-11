@@ -1,5 +1,5 @@
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:top_shelf/top_shelf.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 Middleware openDatabase({required final String filename}) {

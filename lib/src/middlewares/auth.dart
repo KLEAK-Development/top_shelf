@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/request.dart';
+import 'package:top_shelf/src/internal/request.dart';
 
 const _basic = 'Basic';
 const _bearer = 'Bearer';

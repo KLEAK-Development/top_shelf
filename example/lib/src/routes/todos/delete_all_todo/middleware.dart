@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:top_shelf/top_shelf.dart';
 import 'package:shelf_helpers_example/src/models/network/identifiable.dart';
 
 final _credential = 'your:credential';

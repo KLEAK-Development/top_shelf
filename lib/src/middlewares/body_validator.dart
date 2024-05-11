@@ -1,8 +1,8 @@
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/body.dart';
-import 'package:shelf_helpers/src/internal/generate_response.dart';
-import 'package:shelf_helpers/src/internal/network_object.dart';
-import 'package:shelf_helpers/src/internal/request.dart';
+import 'package:top_shelf/src/internal/body.dart';
+import 'package:top_shelf/src/internal/generate_response.dart';
+import 'package:top_shelf/src/internal/network_object.dart';
+import 'package:top_shelf/src/internal/request.dart';
 
 /// [bodyValidator] is a flexible validator that allow you to check whatever
 /// you need on the body

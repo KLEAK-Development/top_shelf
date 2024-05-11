@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/body.dart';
-import 'package:shelf_helpers/src/internal/generate_response.dart';
-import 'package:shelf_helpers/src/internal/network_object.dart';
+import 'package:top_shelf/src/internal/body.dart';
+import 'package:top_shelf/src/internal/generate_response.dart';
+import 'package:top_shelf/src/internal/network_object.dart';
 
 /// [allowedContentType] check if the content-type in the request is part of
 /// the [supportedContentType] that your endpoint support

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:top_shelf/top_shelf.dart';
 import 'package:shelf_helpers_example/src/middlewares/todos/check_todo_with_id_exist.dart';
 import 'package:shelf_helpers_example/src/models/network/put/put_todo.dart';
 import 'package:shelf_helpers_example/src/models/network/put/put_todo_body.dart';

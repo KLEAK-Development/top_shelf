@@ -11,7 +11,7 @@ environment:
 dependencies:
   logging: ^1.1.1
   shelf: ^1.4.0
-  shelf_helpers: 
+  top_shelf: 
     path: ../
   shelf_hotreload: ^1.4.0
   shelf_router: ^1.1.3

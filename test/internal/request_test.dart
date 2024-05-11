@@ -1,5 +1,5 @@
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:top_shelf/top_shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:test/test.dart';
 

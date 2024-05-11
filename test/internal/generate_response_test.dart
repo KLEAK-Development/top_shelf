@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/shelf_helpers.dart';
+import 'package:top_shelf/top_shelf.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';

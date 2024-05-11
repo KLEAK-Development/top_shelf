@@ -1,6 +1,6 @@
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers/src/internal/generate_response.dart';
-import 'package:shelf_helpers/src/internal/network_object.dart';
+import 'package:top_shelf/src/internal/generate_response.dart';
+import 'package:top_shelf/src/internal/network_object.dart';
 
 /// Use [queryParameterValidator] to verify if query parameter [name] is allowed
 /// you can provide the list of allowed value in [allowedValues]
