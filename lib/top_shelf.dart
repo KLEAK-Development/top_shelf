@@ -8,7 +8,7 @@ export 'package:top_shelf/src/internal/request.dart';
 export 'package:top_shelf/src/middlewares/allowed_content_type.dart';
 export 'package:top_shelf/src/middlewares/auth.dart';
 export 'package:top_shelf/src/middlewares/body_validator.dart';
-export 'package:top_shelf/src/middlewares/cookie.dart';
+export 'package:top_shelf/src/middlewares/cookie_manager.dart';
 export 'package:top_shelf/src/middlewares/cors.dart';
 export 'package:top_shelf/src/middlewares/get_body.dart';
 export 'package:top_shelf/src/middlewares/parse_body.dart';
