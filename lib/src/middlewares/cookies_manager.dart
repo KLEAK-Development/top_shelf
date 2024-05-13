@@ -56,10 +56,27 @@ class RequestCookies {
       return [];
     }
 
-    return header.split(';').map((e) {
-      final cookieData = e.split('=');
-      return Cookie(cookieData.first, cookieData.last);
-    }).toList();
+    const cookieAttributes = [
+      'Domain',
+      'Expires',
+      'HttpOnly',
+      'Max-Age',
+      'Path',
+      'Secure',
+    ];
+
+    return header
+        .split('; ')
+        .map((e) {
+          final data = e.split('=');
+          return (data.first, data.last);
+        })
+        .where((element) => !cookieAttributes.contains(element.$1))
+        .map((e) {
+          return Cookie(e.$1, e.$2);
+        })
+        .whereType<Cookie>()
+        .toList();
   }
 }
 

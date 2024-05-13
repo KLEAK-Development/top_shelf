@@ -1,3 +1,8 @@
+## 1.0.0-alpha.5
+
+- fix parsing on cookie
+- add session
+
 ## 1.0.0-alpha.4
 
 - cookie manager

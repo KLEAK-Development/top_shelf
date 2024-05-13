@@ -14,3 +14,4 @@ export 'package:top_shelf/src/middlewares/get_body.dart';
 export 'package:top_shelf/src/middlewares/parse_body.dart';
 export 'package:top_shelf/src/middlewares/provide_path_param.dart';
 export 'package:top_shelf/src/middlewares/query_parameter_validator.dart';
+export 'package:top_shelf/src/middlewares/session_manager.dart';

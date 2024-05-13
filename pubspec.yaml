@@ -10,6 +10,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  clock: ^1.1.1
   logging: ^1.1.1
   meta: ^1.9.1
   mime: ^1.0.4
