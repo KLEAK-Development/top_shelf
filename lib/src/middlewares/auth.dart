@@ -124,7 +124,7 @@ class _Auth<T> extends Auth<T> {
   @override
   Future<(bool, T?)> authenticate(Request request) async {
     if (_parent != null) {
-      final (authorized, identifiable) = await _parent!.authenticate(request);
+      final (authorized, identifiable) = await _parent.authenticate(request);
       if (authorized) {
         return (authorized, identifiable);
       }

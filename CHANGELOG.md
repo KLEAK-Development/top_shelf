@@ -1,3 +1,7 @@
+## 1.0.0-alpha.4
+
+- cookie manager
+
 ## 1.0.0-alpha.3
 
 - auth middleware
