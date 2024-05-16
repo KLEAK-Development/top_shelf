@@ -10,7 +10,7 @@ import 'package:top_shelf/src/internal/request.dart';
 import 'package:shelf_multipart/form_data.dart';
 import 'package:xml2json/xml2json.dart';
 
-final _logger = Logger('SHELF_HELPERS');
+final _logger = Logger('TOP_SHELF');
 
 /// [getBody] parse the body based on Content-Type automatically
 ///
@@ -53,6 +53,15 @@ Middleware getBody<T extends Body>(T Function(dynamic) deserializer,
           'about:blank',
           'Not allowed Content-Type',
           'getBody middleware does\'t support \'$requestContentType\', allowed content-type are: \'${_allowedContentType.join('\', \'')}\'',
+          400,
+          request.requestedUri.path,
+        );
+        return generateResponse(request, body);
+      } on FormatException catch (error) {
+        final body = BadRequest(
+          'about:blank',
+          error.runtimeType.toString(),
+          error.message,
           400,
           request.requestedUri.path,
         );

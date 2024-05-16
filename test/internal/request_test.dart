@@ -32,7 +32,7 @@ void main() {
       );
 
     try {
-      await makeRequest(router, method: 'GET', url: 'http://localhost/');
+      await makeRequest(router.call, method: 'GET', url: 'http://localhost/');
     } on StateError catch (error) {
       expect(error.message, '''
 request.get<String>() called with a request context that does not contain a String.
@@ -60,8 +60,8 @@ Here is an example on how to provide a String
         (Request request) => Response.ok(request.getPathParameter('id')),
       );
 
-    final response =
-        await makeRequest(router, method: 'GET', url: 'http://localhost/12');
+    final response = await makeRequest(router.call,
+        method: 'GET', url: 'http://localhost/12');
     final body = await response.readAsString();
     expect(body, equals('12'));
   });
@@ -74,7 +74,7 @@ Here is an example on how to provide a String
       );
 
     try {
-      await makeRequest(router, method: 'GET', url: 'http://localhost/');
+      await makeRequest(router.call, method: 'GET', url: 'http://localhost/');
     } on StateError catch (error) {
       expect(error.message, '''
 request.getPathParameter(id) called with a request context that does not contain a value in context['shelf_router/params'][id].

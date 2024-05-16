@@ -6,6 +6,6 @@ Middleware middleware() => Pipeline()
     .addMiddleware(queryParameterValidator(
       required: false,
       name: 'status',
-      allowedValues: [...TodoStatus.values.map((e) => e.name).toList(), 'all'],
+      allowedValues: [...TodoStatus.values.map((e) => e.name), 'all'],
     ))
     .middleware;

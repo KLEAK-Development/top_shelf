@@ -7,7 +7,9 @@ import 'package:top_shelf/top_shelf.dart';
 
 final _sessions = <String, Session>{};
 
-Middleware sessionManager() {
+Middleware sessionManager({
+  final Duration sessionDuration = const Duration(hours: 1),
+}) {
   return (handler) {
     return (request) async {
       try {
@@ -21,8 +23,6 @@ Middleware sessionManager() {
         final response = await handler(request.set<Session>(() => session));
 
         final now = clock.now();
-        //  (kevin): Maybe we should let user set this ?
-        const sessionDuration = Duration(hours: 1);
         final expiresAt = now.add(sessionDuration);
 
         final cookie = Cookie('sessionId', sessionId)
