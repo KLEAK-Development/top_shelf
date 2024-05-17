@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers_example/src/modules/todos/models/todo.dart';
-import 'package:shelf_helpers_example/src/modules/todos/models/todo_id_path_parameters.dart';
+import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
+import 'package:top_shelf_example/src/modules/todos/models/todo_id_path_parameters.dart';
 import 'package:top_shelf/top_shelf.dart';
-import 'package:shelf_helpers_example/src/modules/todos/middlewares/check_todo_with_id_exist.dart';
-import 'package:shelf_helpers_example/src/modules/todos/routes/update_todo/models/put_todo.dart';
-import 'package:shelf_helpers_example/src/modules/todos/routes/update_todo/models/put_todo_body.dart';
+import 'package:top_shelf_example/src/modules/todos/middlewares/check_todo_with_id_exist.dart';
+import 'package:top_shelf_example/src/modules/todos/routes/update_todo/models/put_todo.dart';
+import 'package:top_shelf_example/src/modules/todos/routes/update_todo/models/put_todo_body.dart';
 
 Middleware middleware() => Pipeline()
     .addMiddleware(allowedContentType([

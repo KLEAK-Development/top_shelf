@@ -1,1 +1,1 @@
-export 'package:shelf_helpers_example/src/server.dart';
+export 'package:top_shelf_example/src/server.dart';

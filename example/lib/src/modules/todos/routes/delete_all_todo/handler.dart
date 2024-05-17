@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers_example/src/modules/todos/routes/delete_all_todo/delete_all_todo.dart'
+import 'package:top_shelf_example/src/modules/todos/routes/delete_all_todo/delete_all_todo.dart'
     as delete_all_todo;
 
 Response handler(Request request) {

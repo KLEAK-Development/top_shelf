@@ -1,4 +1,4 @@
-import 'package:shelf_helpers_example/src/modules/todos/models/todo.dart';
+import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 class TodosRepository {

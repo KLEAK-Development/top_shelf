@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:logging/logging.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:shelf_helpers_example/src/router.dart';
+import 'package:top_shelf_example/src/router.dart';
 
 Future<HttpServer> server(
     {final InternetAddress? address, final int port = 8080}) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:shelf_helpers_example/src/modules/todos/models/todo.dart';
+import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
 import 'package:top_shelf/top_shelf.dart';
 import 'package:xml/xml.dart';
 

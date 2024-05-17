@@ -1,7 +1,7 @@
 import 'package:shelf/shelf.dart';
-import 'package:shelf_helpers_example/src/modules/todos/models/todo.dart';
-import 'package:shelf_helpers_example/src/modules/todos/repositories/todos.dart';
-import 'package:shelf_helpers_example/src/modules/todos/routes/update_todo/models/put_todo.dart';
+import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
+import 'package:top_shelf_example/src/modules/todos/repositories/todos.dart';
+import 'package:top_shelf_example/src/modules/todos/routes/update_todo/models/put_todo.dart';
 import 'package:top_shelf/top_shelf.dart';
 
 Todo handler(Request request, int id, PutTodo updateTodo) {
