@@ -20,8 +20,8 @@ class JsonWebToken {
 
   JsonWebToken({this.secretKeyFactory = _defaultJwtSecretKeyFactory});
 
-  JsonWebToken.parse(String jwt,
-      {this.secretKeyFactory = _defaultJwtSecretKeyFactory}) {
+  JsonWebToken.parse(String jwt)
+      : secretKeyFactory = _defaultJwtSecretKeyFactory {
     _jwt = jwt;
     final parts = jwt.split('.');
 
@@ -32,17 +32,21 @@ class JsonWebToken {
     _payload = json.decode(utf8.decode(base64Url.decode(encodedPayload)));
   }
 
-  void createPayload(String userId,
-      {Map<String, dynamic>? payload,
-      String Function() getJwtSecretKey = _defaultJwtSecretKeyFactory}) {
-    // Create the payload (claims)
+  String get sub => _payload['sub'];
+  String get iat => _payload['iat'];
+  String get exp => _payload['exp'];
+
+  Map<String, dynamic> get payload => _payload;
+
+  void createPayload(
+    String userId, {
+    Map<String, dynamic>? payload,
+    Duration expireIn = const Duration(hours: 1),
+  }) {
     _payload = {
       'sub': userId,
       'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      'exp': DateTime.now()
-              .add(const Duration(hours: 24))
-              .millisecondsSinceEpoch ~/
-          1000,
+      'exp': DateTime.now().add(expireIn).millisecondsSinceEpoch ~/ 1000,
       ...?payload,
     };
   }

@@ -18,7 +18,7 @@ export 'package:top_shelf/src/middlewares/provide_path_param.dart';
 export 'package:top_shelf/src/middlewares/query_parameter_validator.dart';
 export 'package:top_shelf/src/middlewares/session_manager.dart';
 
-export 'package:top_shelf/src/modules/repositories/accounts/abstract.dart';
-export 'package:top_shelf/src/modules/repositories/accounts/sqlite3.dart';
-export 'package:top_shelf/src/modules/routes/accounts/accounts.dart';
-export 'package:top_shelf/src/modules/routes/authentication/authentication.dart';
+export 'package:top_shelf/src/modules/accounts/repositories/abstract.dart';
+export 'package:top_shelf/src/modules/accounts/repositories/sqlite3.dart';
+export 'package:top_shelf/src/modules/accounts/router/accounts.dart';
+export 'package:top_shelf/src/modules/authentication/router/authentication.dart';

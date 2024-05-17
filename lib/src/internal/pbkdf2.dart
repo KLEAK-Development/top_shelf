@@ -4,6 +4,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:pointycastle/export.dart';
+import 'package:quiver/collection.dart';
 
 String _defaultPepperFactory() {
   final pepper = Platform.environment['PEPPER'];
@@ -43,7 +44,7 @@ class Pbkdf2 {
     final derivedKey =
         derivator.process(utf8.encode('${pepperFactory()}$password'));
 
-    return _listsEqual(derivedKey, storedKey);
+    return listsEqual(derivedKey, storedKey);
   }
 
   Uint8List _createSalt() {
@@ -62,17 +63,5 @@ class Pbkdf2 {
     derivator.init(Pbkdf2Parameters(salt, iterationCount, derivedKeyLength));
 
     return derivator;
-  }
-
-  bool _listsEqual(List<int> list1, List<int> list2) {
-    if (list1.length != list2.length) {
-      return false;
-    }
-    for (int i = 0; i < list1.length; i++) {
-      if (list1[i] != list2[i]) {
-        return false;
-      }
-    }
-    return true;
   }
 }
