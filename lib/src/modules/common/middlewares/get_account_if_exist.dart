@@ -8,11 +8,11 @@ typedef AccountExist = bool;
 Middleware getAccountIfExist<T extends HasEmail>() {
   return (handler) {
     return (request) async {
-      final createAccount = request.get<T>();
+      final objectWithEmail = request.get<T>();
       final repository = request.get<AAccountsRepository>();
 
       final optionalAccount =
-          await repository.findAccountByEmail(createAccount.email);
+          await repository.findAccountByEmail(objectWithEmail.email);
 
       var modifiedRequest =
           request.set<AccountExist>(() => optionalAccount.isPresent);
