@@ -7,8 +7,8 @@ import 'package:top_shelf/src/middlewares/allowed_content_type.dart';
 import 'package:top_shelf/src/middlewares/body_validator.dart';
 import 'package:top_shelf/src/middlewares/get_body.dart';
 import 'package:top_shelf/src/middlewares/parse_body.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/refresh/refresh.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/refresh/refresh_body.dart';
+import 'package:top_shelf/src/modules/authentication/routes/refresh/models/refresh.dart';
+import 'package:top_shelf/src/modules/authentication/routes/refresh/models/refresh_body.dart';
 
 Middleware middleware() => Pipeline()
     .addMiddleware(allowedContentType([

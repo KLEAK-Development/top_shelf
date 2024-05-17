@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
-import 'package:top_shelf/src/modules/accounts/models/create_account/create_account.dart';
+import 'package:top_shelf/src/modules/accounts/routes/create_account/models/create_account.dart';
 import 'package:top_shelf/src/modules/accounts/routes/create_account/create_account.dart'
     as create_account;
 import 'package:top_shelf/top_shelf.dart';

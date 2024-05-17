@@ -4,8 +4,8 @@ import 'package:top_shelf/src/internal/pbkdf2.dart';
 import 'package:top_shelf/src/internal/request.dart';
 import 'package:top_shelf/src/modules/common/middlewares/get_account_if_exist.dart';
 import 'package:top_shelf/src/modules/accounts/models/account.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/login/login.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/tokens.dart';
+import 'package:top_shelf/src/modules/authentication/routes/login/models/login.dart';
+import 'package:top_shelf/src/modules/authentication/models/tokens.dart';
 import 'package:top_shelf/src/modules/accounts/repositories/abstract.dart';
 
 Future<Tokens> handler(Request request, Login login) async {

@@ -2,7 +2,7 @@ import 'package:shelf/shelf.dart';
 import 'package:top_shelf/src/internal/pbkdf2.dart';
 import 'package:top_shelf/src/internal/request.dart';
 import 'package:top_shelf/src/modules/accounts/models/account.dart';
-import 'package:top_shelf/src/modules/accounts/models/create_account/create_account.dart';
+import 'package:top_shelf/src/modules/accounts/routes/create_account/models/create_account.dart';
 import 'package:top_shelf/src/modules/accounts/repositories/abstract.dart';
 
 Future<Account> handler(Request request, CreateAccount createAccount) async {

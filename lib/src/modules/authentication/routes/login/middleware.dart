@@ -7,8 +7,8 @@ import 'package:top_shelf/src/middlewares/body_validator.dart';
 import 'package:top_shelf/src/middlewares/get_body.dart';
 import 'package:top_shelf/src/middlewares/parse_body.dart';
 import 'package:top_shelf/src/modules/common/middlewares/get_account_if_exist.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/login/login.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/login/login_body.dart';
+import 'package:top_shelf/src/modules/authentication/routes/login/models/login.dart';
+import 'package:top_shelf/src/modules/authentication/routes/login/models/login_body.dart';
 
 Middleware middleware() => Pipeline()
     .addMiddleware(allowedContentType([

@@ -1,7 +1,7 @@
 import 'package:shelf/shelf.dart';
 import 'package:top_shelf/src/internal/jwt.dart';
 import 'package:top_shelf/src/internal/request.dart';
-import 'package:top_shelf/src/modules/authentication/models/network/tokens.dart';
+import 'package:top_shelf/src/modules/authentication/models/tokens.dart';
 
 Future<Tokens> handler(Request request) async {
   final refreshToken = request.get<JsonWebToken>();

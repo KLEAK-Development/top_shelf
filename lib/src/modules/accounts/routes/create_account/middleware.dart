@@ -7,8 +7,8 @@ import 'package:top_shelf/src/middlewares/body_validator.dart';
 import 'package:top_shelf/src/middlewares/get_body.dart';
 import 'package:top_shelf/src/middlewares/parse_body.dart';
 import 'package:top_shelf/src/modules/common/middlewares/get_account_if_exist.dart';
-import 'package:top_shelf/src/modules/accounts/models/create_account/create_account.dart';
-import 'package:top_shelf/src/modules/accounts/models/create_account/create_account_body.dart';
+import 'package:top_shelf/src/modules/accounts/routes/create_account/models/create_account.dart';
+import 'package:top_shelf/src/modules/accounts/routes/create_account/models/create_account_body.dart';
 
 Middleware middleware() => Pipeline()
     .addMiddleware(allowedContentType([

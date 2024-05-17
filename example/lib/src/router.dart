@@ -2,9 +2,9 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf_helpers_example/src/middlewares/sqlite_database.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'package:top_shelf/top_shelf.dart';
-import 'package:shelf_helpers_example/src/routes/health_check/handler.dart'
+import 'package:shelf_helpers_example/src/modules/health_check/routes/handler.dart'
     as health_check;
-import 'package:shelf_helpers_example/src/routes/todos/todos.dart';
+import 'package:shelf_helpers_example/src/modules/todos/router/todos.dart';
 import 'package:shelf_router/shelf_router.dart';
 
 Handler router = _getRouter();
