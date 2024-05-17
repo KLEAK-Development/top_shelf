@@ -1,3 +1,13 @@
+## 1.0.0-alpha.7
+
+/!\ WIP /!\
+
+### Modules
+#### authentication
+- change in the response to add a long lived refresh_token valid for 30days
+- rename token to access_token and also shorten is lifetime to 1 hours
+- added a new endpoint to get a new access_token with the refresh_token
+
 ## 1.0.0-alpha.6
 
 - added a module to manage accounts
