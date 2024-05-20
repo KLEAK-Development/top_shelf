@@ -1,7 +1,7 @@
 import 'package:quiver/core.dart';
 import 'package:top_shelf/src/modules/accounts/models/account.dart';
-import 'package:top_shelf/src/modules/accounts/repositories/abstract.dart';
 import 'package:sqlite3/sqlite3.dart';
+import 'package:top_shelf/src/modules/common/repositories/abstract.dart';
 
 class SqliteAccountRepository implements AAccountsRepository {
   final Database database;

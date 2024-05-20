@@ -1,2 +1,2 @@
-export 'package:top_shelf/src/modules/accounts/repositories/abstract.dart';
-export 'package:top_shelf/src/modules/accounts/repositories/sqlite3.dart';
+export 'package:top_shelf/src/modules/common/repositories/abstract.dart';
+export 'package:top_shelf/src/modules/common/repositories/sqlite3.dart';

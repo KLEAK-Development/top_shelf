@@ -1,6 +1,7 @@
 import 'package:shelf/shelf.dart';
 import 'package:top_shelf/src/modules/accounts/models/account.dart';
 import 'package:top_shelf/src/modules/common/models/has_email.dart';
+import 'package:top_shelf/src/modules/common/repositories/abstract.dart';
 import 'package:top_shelf/top_shelf.dart';
 
 typedef AccountExist = bool;
