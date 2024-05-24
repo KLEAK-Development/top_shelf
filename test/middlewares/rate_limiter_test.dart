@@ -9,7 +9,7 @@ import '../utils.dart';
 void main() {
   group('rateLimiter', () {
     test('allows requests below the limit', () async {
-      final middleware = rateLimiter(maxRequestsPerMinute: 10);
+      final middleware = rateLimiter(maxRequestsPerDuration: 10);
       final handler = middleware((request) => Response.ok('Hello, world!'));
 
       final response = await makeRequest(handler, method: 'GET');
@@ -18,7 +18,7 @@ void main() {
 
     test('rejects requests above the limit', () async {
       fakeAsync((async) async {
-        final middleware = rateLimiter(maxRequestsPerMinute: 1);
+        final middleware = rateLimiter(maxRequestsPerDuration: 1);
         final handler = middleware((request) => Response.ok('Hello, world!'));
 
         // Make 2 requests within 1 second
@@ -35,7 +35,7 @@ void main() {
 
     test('resets the limit after the duration', () async {
       fakeAsync((async) async {
-        final middleware = rateLimiter(maxRequestsPerMinute: 1);
+        final middleware = rateLimiter(maxRequestsPerDuration: 1);
         final handler = middleware((request) => Response.ok('Hello, world!'));
 
         // Make 2 requests within 1 second
@@ -58,7 +58,7 @@ void main() {
 
     test('tracks requests per client', () async {
       fakeAsync((async) async {
-        final middleware = rateLimiter(maxRequestsPerMinute: 1);
+        final middleware = rateLimiter(maxRequestsPerDuration: 1);
         final handler = middleware((request) => Response.ok('Hello, world!'));
 
         // Make 2 requests from different clients within 1 second
@@ -85,7 +85,7 @@ void main() {
 
     test('sets rate limit headers', () async {
       fakeAsync((_) async {
-        final middleware = rateLimiter(maxRequestsPerMinute: 1);
+        final middleware = rateLimiter(maxRequestsPerDuration: 1);
         final handler = middleware((request) => Response.ok('Hello, world!'));
 
         // Make a request
