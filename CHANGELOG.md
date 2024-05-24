@@ -2,6 +2,10 @@
 
 /!\ WIP /!\
 
+### Middlewares
+
+- add rate limiter
+
 ### Modules
 #### authentication
 - change in the response to add a long lived refresh_token valid for 30days
