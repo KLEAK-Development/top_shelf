@@ -1,6 +1,8 @@
-## 1.0.0-alpha.7
+## 1.0.0-alpha.8
 
-/!\ WIP /!\
+- add a way to customize role when creating an account
+
+## 1.0.0-alpha.7
 
 ### Middlewares
 

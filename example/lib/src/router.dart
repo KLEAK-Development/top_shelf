@@ -24,7 +24,7 @@ Handler _getRouter() {
       Pipeline()
           .addMiddleware(provide<AAccountsRepository>(
               (request) => SqliteAccountRepository(request.get<Database>())))
-          .addHandler(accountsModule),
+          .addHandler(accountsModule()),
     )
     ..mount('/todos', todos)
     ..all(
