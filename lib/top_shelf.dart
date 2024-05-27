@@ -19,7 +19,7 @@ export 'package:top_shelf/src/middlewares/query_parameter_validator.dart';
 export 'package:top_shelf/src/middlewares/rate_limiter.dart';
 export 'package:top_shelf/src/middlewares/session_manager.dart';
 
-export 'package:top_shelf/src/modules/accounts/router/accounts.dart';
-export 'package:top_shelf/src/modules/authentication/router/authentication.dart';
-export 'package:top_shelf/src/modules/common/repositories/abstract.dart';
-export 'package:top_shelf/src/modules/common/repositories/sqlite3.dart';
+export 'package:top_shelf/src/services/accounts/router/accounts.dart';
+export 'package:top_shelf/src/services/authentication/router/authentication.dart';
+export 'package:top_shelf/src/services/common/repositories/abstract.dart';
+export 'package:top_shelf/src/services/common/repositories/sqlite3.dart';
