@@ -1,3 +1,7 @@
+## 1.0.0-alpha.9 - TBP
+
+- fix jwt by removing base64 trailing
+
 ## 1.0.0-alpha.8
 
 - add a way to customize role when creating an account
