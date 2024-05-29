@@ -7,3 +7,8 @@ We also provide architecture example in the [example](https://github.com/sakemae
 ## Wiki
 
 see our wiki [here](https://github.com/sakemaer/top_shelf/wiki)
+
+## Check code
+
+ - using [idx.google.com](https://idx.google.com/top-shelf-7360855)
+
