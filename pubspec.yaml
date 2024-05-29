@@ -1,9 +1,9 @@
 name: top_shelf
 description: Some helpers to ease the use of shelf
-version: 1.0.0-alpha.8
+version: 1.0.0-alpha.9
 # homepage: https://www.example.com
 
-repository: https://gitlab.com/sakemaer/shelf_helpers
+repository: https://github.com/sakemaer/top_shelf
 issue_tracker: https://gitlab.com/sakemaer/shelf_helpers/-/issues
 
 environment:

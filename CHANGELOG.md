@@ -1,6 +1,7 @@
-## 1.0.0-alpha.9 - TBP
+## 1.0.0-alpha.9
 
 - fix jwt by removing base64 trailing
+- migarte code to github
 
 ## 1.0.0-alpha.8
 
