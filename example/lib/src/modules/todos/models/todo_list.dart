@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
 import 'package:top_shelf/top_shelf.dart';
 import 'package:xml/xml.dart';
@@ -10,16 +8,16 @@ class TodoList implements NetworkObjectToJson, NetworkObjectToXml {
   TodoList(this.todos);
 
   @override
-  String toJsonString() => json.encode(todos.map((e) => e.toJson()).toList());
+  List<Map<String, dynamic>> toJson() => todos.map((e) => e.toJson()).toList();
 
   @override
-  String toXmlString() {
+  XmlDocument toXml() {
     final builder = XmlBuilder();
     builder.element('TodoList', nest: () {
       for (final todo in todos) {
-        builder.xml(todo.toXmlString());
+        builder.xml(todo.toXml().toXmlString());
       }
     });
-    return builder.buildDocument().toXmlString();
+    return builder.buildDocument();
   }
 }

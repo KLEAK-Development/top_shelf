@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:top_shelf/top_shelf.dart';
 
 class Account implements NetworkObjectToJson {
@@ -47,6 +45,7 @@ class Account implements NetworkObjectToJson {
     }
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -55,7 +54,4 @@ class Account implements NetworkObjectToJson {
       'roles': roles,
     };
   }
-
-  @override
-  String toJsonString() => json.encode(toJson());
 }

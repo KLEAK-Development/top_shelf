@@ -13,10 +13,8 @@ class User implements NetworkObjectToJson {
 
   const User(this.name, this.age);
 
-  Map<String, dynamic> toJson() => {'name': name, 'age': age};
-
   @override
-  String toJsonString() => json.encode(toJson());
+  Map<String, dynamic> toJson() => {'name': name, 'age': age};
 }
 
 class UserBody extends Body<User> {
@@ -36,8 +34,8 @@ void main() {
         .addMiddleware(
             getBody<UserBody>((body) => UserBody(body), objectName: ''))
         .addMiddleware(parseBody<User, UserBody>())
-        .addHandler(
-            (request) => Response.ok(request.get<User>().toJsonString()));
+        .addHandler((request) =>
+            Response.ok(json.encode(request.get<User>().toJson())));
 
     final response = await makeRequest(
       handler,
@@ -57,8 +55,8 @@ void main() {
     final handler = const Pipeline()
         .addMiddleware(getBody((body) => UserBody(body), objectName: ''))
         .addMiddleware(parseBody<User, UserBody>())
-        .addHandler(
-            (request) => Response.ok(request.get<User>().toJsonString()));
+        .addHandler((request) =>
+            Response.ok(json.encode(request.get<User>().toJson())));
 
     final response = await makeRequest(
       handler,
@@ -79,8 +77,8 @@ void main() {
         .addMiddleware(
             getBody((body) => UserBody(body), objectName: objectName))
         .addMiddleware(parseBody<User, UserBody>())
-        .addHandler(
-            (request) => Response.ok(request.get<User>().toJsonString()));
+        .addHandler((request) =>
+            Response.ok(json.encode(request.get<User>().toJson())));
 
     final response = await makeRequest(
       handler,
@@ -102,8 +100,8 @@ void main() {
     final handler = const Pipeline()
         .addMiddleware(getBody((body) => UserBody(body), objectName: ''))
         .addMiddleware(parseBody<User, UserBody>())
-        .addHandler(
-            (request) => Response.ok(request.get<User>().toJsonString()));
+        .addHandler((request) =>
+            Response.ok(json.encode(request.get<User>().toJson())));
 
     final bodyFromFile = File('test/body.txt').readAsStringSync();
 

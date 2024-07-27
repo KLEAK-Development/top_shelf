@@ -1,15 +1,13 @@
-import 'dart:convert';
-
 import 'package:xml/xml.dart';
 
 sealed class NetworkObject {}
 
 abstract interface class NetworkObjectToJson extends NetworkObject {
-  String toJsonString();
+  dynamic toJson();
 }
 
 abstract interface class NetworkObjectToXml extends NetworkObject {
-  String toXmlString();
+  XmlDocument toXml();
 }
 
 final class BadRequest implements NetworkObjectToJson, NetworkObjectToXml {
@@ -23,7 +21,8 @@ final class BadRequest implements NetworkObjectToJson, NetworkObjectToXml {
   BadRequest(this.type, this.title, this.details, this.status, this.instance,
       {this.field});
 
-  Map<String, dynamic> toJson() {
+  @override
+  dynamic toJson() {
     return {
       'type': type,
       'title': title,
@@ -35,10 +34,7 @@ final class BadRequest implements NetworkObjectToJson, NetworkObjectToXml {
   }
 
   @override
-  String toJsonString() => json.encode(toJson());
-
-  @override
-  String toXmlString() {
+  XmlDocument toXml() {
     final builder = XmlBuilder();
     builder.element('BadRequest', nest: () {
       builder.element('type', nest: () {
@@ -62,6 +58,6 @@ final class BadRequest implements NetworkObjectToJson, NetworkObjectToXml {
         });
       }
     });
-    return builder.buildDocument().toXmlString();
+    return builder.buildDocument();
   }
 }
