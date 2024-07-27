@@ -8,17 +8,25 @@ import 'package:top_shelf/src/internal/network_object.dart';
 /// [object] is the object that will be serialized
 /// you can specify the status code by changing [status]
 /// [defaultAcceptHeader] is used only if the request doesn't have accept header
-Response generateResponse(final Request request, final NetworkObject object,
-    {final int status = HttpStatus.ok,
-    final String defaultAcceptHeader = '*/*)'}) {
+Response generateResponse(
+  final Request request,
+  final NetworkObject object, {
+  final int status = HttpStatus.ok,
+  final String defaultAcceptHeader = '*/*',
+}) {
   final requestAccept =
       request.headers[HttpHeaders.acceptHeader] ?? defaultAcceptHeader;
   final acceptAll = requestAccept.contains('*/*');
 
+  final statusCode = switch (object) {
+    BadRequest _ => HttpStatus.badRequest,
+    _ => status,
+  };
+
   if (acceptAll) {
     return switch (object) {
-      NetworkObjectToJson _ => _jsonResponse(status, object),
-      NetworkObjectToXml _ => _xmlResponse(status, object),
+      NetworkObjectToJson _ => _jsonResponse(statusCode, object),
+      NetworkObjectToXml _ => _xmlResponse(statusCode, object),
     };
   }
 
@@ -32,15 +40,41 @@ Response generateResponse(final Request request, final NetworkObject object,
     if (acceptHeader.primaryType == 'application' &&
         acceptHeader.subType == 'json' &&
         object is NetworkObjectToJson) {
-      return _jsonResponse(status, object);
+      return _jsonResponse(statusCode, object);
     } else if (acceptHeader.primaryType == 'application' &&
         acceptHeader.subType == 'xml' &&
         object is NetworkObjectToXml) {
-      return _xmlResponse(status, object);
+      return _xmlResponse(statusCode, object);
     }
   }
 
   return Response.badRequest();
+}
+
+/// Allow you to easily generate response based on accept header
+/// [object] is a list of object that will be serialized
+/// you can specify the status code by changing [status]
+/// [defaultAcceptHeader] is used only if the request doesn't have accept header
+Response generateJsonReponseList(
+  final Request request,
+  final List<NetworkObjectToJson> objects, {
+  final int status = HttpStatus.ok,
+  final String defaultAcceptHeader = '*/*',
+}) {
+  return generateResponse(request, _NetworkObjectsToJsonWrapper(objects),
+      status: status, defaultAcceptHeader: defaultAcceptHeader);
+}
+
+class _NetworkObjectsToJsonWrapper implements NetworkObjectToJson {
+  final List<NetworkObject> objects;
+
+  _NetworkObjectsToJsonWrapper(this.objects);
+
+  @override
+  List<dynamic> toJson() => objects
+      .cast<NetworkObjectToJson>()
+      .map((element) => element.toJson())
+      .toList();
 }
 
 Response _jsonResponse(int status, NetworkObjectToJson object) {
@@ -48,13 +82,9 @@ Response _jsonResponse(int status, NetworkObjectToJson object) {
     BadRequest _ => 'application/problem+json',
     NetworkObjectToJson _ => 'application/json',
   };
-  final statusCode = switch (object) {
-    BadRequest _ => HttpStatus.badRequest,
-    _ => status,
-  };
 
   return Response(
-    statusCode,
+    status,
     body: json.encode(object.toJson()),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,
@@ -67,13 +97,9 @@ Response _xmlResponse(int status, NetworkObjectToXml object) {
     BadRequest _ => 'application/problem+xml',
     NetworkObjectToXml _ => 'application/xml',
   };
-  final statusCode = switch (object) {
-    BadRequest _ => HttpStatus.badRequest,
-    _ => status,
-  };
 
   return Response(
-    statusCode,
+    status,
     body: object.toXml().toXmlString(),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,
