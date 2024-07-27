@@ -3,9 +3,9 @@ import 'package:top_shelf_example/src/modules/todos/models/todo.dart';
 import 'package:top_shelf/top_shelf.dart';
 
 Middleware middleware() => Pipeline()
-    .addMiddleware(queryParameterValidator(
+    .addMiddleware(queryParameterContainsValue(
       required: false,
       name: 'status',
-      allowedValues: [...TodoStatus.values.map((e) => e.name), 'all'],
+      containsValues: [...TodoStatus.values.map((e) => e.name), 'all'],
     ))
     .middleware;
