@@ -11,6 +11,7 @@ class User implements NetworkObjectToJson, NetworkObjectToXml {
   final String name = 'kleak';
   final int age = 25;
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -19,10 +20,7 @@ class User implements NetworkObjectToJson, NetworkObjectToXml {
   }
 
   @override
-  String toJsonString() => json.encode(toJson());
-
-  @override
-  String toXmlString() {
+  XmlDocument toXml() {
     final builder = XmlBuilder();
     builder.element('User', nest: () {
       builder.element('name', nest: () {
@@ -32,7 +30,7 @@ class User implements NetworkObjectToJson, NetworkObjectToXml {
         builder.text(age.toString());
       });
     });
-    return builder.buildDocument().toXmlString();
+    return builder.buildDocument();
   }
 }
 

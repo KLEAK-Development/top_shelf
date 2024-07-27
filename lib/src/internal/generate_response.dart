@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:shelf/shelf.dart';
@@ -54,7 +55,7 @@ Response _jsonResponse(int status, NetworkObjectToJson object) {
 
   return Response(
     statusCode,
-    body: object.toJsonString(),
+    body: json.encode(object.toJson()),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,
     },
@@ -73,7 +74,7 @@ Response _xmlResponse(int status, NetworkObjectToXml object) {
 
   return Response(
     statusCode,
-    body: object.toXmlString(),
+    body: object.toXml().toXmlString(),
     headers: {
       HttpHeaders.contentTypeHeader: contentType,
     },

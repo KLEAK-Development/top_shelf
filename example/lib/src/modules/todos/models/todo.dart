@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:top_shelf/top_shelf.dart';
 import 'package:xml/xml.dart';
 
@@ -39,6 +37,7 @@ class Todo implements NetworkObjectToJson, NetworkObjectToXml {
     }
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -50,10 +49,7 @@ class Todo implements NetworkObjectToJson, NetworkObjectToXml {
   }
 
   @override
-  String toJsonString() => json.encode(toJson());
-
-  @override
-  String toXmlString() {
+  XmlDocument toXml() {
     final builder = XmlBuilder();
     builder.element('Todo', nest: () {
       builder.element('id', nest: () {
@@ -74,6 +70,6 @@ class Todo implements NetworkObjectToJson, NetworkObjectToXml {
         builder.text(status.name);
       });
     });
-    return builder.buildDocument().toXmlString();
+    return builder.buildDocument();
   }
 }
