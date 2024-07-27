@@ -6,6 +6,8 @@ version: 1.0.0-alpha.9
 repository: https://github.com/sakemaer/top_shelf
 issue_tracker: https://github.com/sakemaer/top_shelf/issues
 
+publish_to: none
+
 topic:
   - backend
   - shelf
@@ -20,6 +22,10 @@ dependencies:
   logging: ^1.1.1
   meta: ^1.9.1
   mime: ^1.0.4
+  pbkdf2:
+    git:
+      url: https://github.com/KLEAK-Development/pbkdf2.git
+      ref: 9ea05ea44d36f416407545916d438ddf7df039d7
   pointycastle: ^3.9.1  
   quiver: ^3.2.1
   shelf: ^1.4.0
