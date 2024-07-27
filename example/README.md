@@ -18,5 +18,12 @@ dart run tools/create_database.dart
 
 To launch the server :
 ```sh
-dart run bin/server.dart
+dart run bin/server.dart                
+```
+
+
+### Launching your server with hot reload
+
+```sh
+dart run --enable-vm-service bin/dev.dart
 ```
