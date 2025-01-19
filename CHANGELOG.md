@@ -1,7 +1,11 @@
+## 1.0.0-alpha.10
+
+- use status code of the bad request object
+
 ## 1.0.0-alpha.9
 
 - fix jwt by removing base64 trailing
-- migarte code to github
+- migrate code to github
 
 ## 1.0.0-alpha.8
 
