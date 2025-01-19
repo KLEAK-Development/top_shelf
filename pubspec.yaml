@@ -1,6 +1,6 @@
 name: top_shelf
 description: Some helpers to ease the use of shelf
-version: 1.0.0-alpha.9
+version: 1.0.0-alpha.10
 # homepage: https://www.example.com
 
 repository: https://github.com/sakemaer/top_shelf
@@ -13,7 +13,7 @@ topic:
   - shelf
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   clock: ^1.1.1
@@ -26,16 +26,15 @@ dependencies:
     git:
       url: https://github.com/KLEAK-Development/pbkdf2.git
       ref: 9ea05ea44d36f416407545916d438ddf7df039d7
-  pointycastle: ^3.9.1  
+  pointycastle: ^3.9.1
   quiver: ^3.2.1
   shelf: ^1.4.0
   shelf_multipart: ^1.0.0
   shelf_router: ^1.1.3
-  sqlite3: ^2.4.3 
+  sqlite3: ^2.4.3
   xml: ^6.2.2
   xml2json: ^6.2.3
 
 dev_dependencies:
   lints: ^4.0.0
   test: ^1.16.0
-
