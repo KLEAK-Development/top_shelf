@@ -19,7 +19,7 @@ Response generateResponse(
   final acceptAll = requestAccept.contains('*/*');
 
   final statusCode = switch (object) {
-    BadRequest _ => HttpStatus.badRequest,
+    BadRequest badRequest => badRequest.status,
     _ => status,
   };
 
