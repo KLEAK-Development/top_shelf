@@ -115,4 +115,79 @@ void main() {
       expect(data, isA<List>());
     });
   });
+
+  group('BadRequest', () {
+    test('should use status code from BadRequest object', () async {
+      final badRequest = BadRequest(
+        'about:blank',
+        'Invalid input',
+        'The provided data is invalid',
+        HttpStatus.unprocessableEntity,
+        'http://localhost:8080/bad-request',
+      );
+
+      final response = generateResponse(
+        Request(
+          'GET',
+          Uri.parse('http://localhost:8080/bad-request'),
+          headers: {
+            HttpHeaders.acceptHeader: 'application/json',
+          },
+        ),
+        badRequest,
+      );
+
+      expect(response.statusCode, HttpStatus.unprocessableEntity);
+
+      final body = await response.readAsString();
+      final data = json.decode(body);
+
+      expect(data['type'], equals('about:blank'));
+      expect(data['title'], equals('Invalid input'));
+      expect(data['details'], equals('The provided data is invalid'));
+      expect(data['status'], equals(HttpStatus.unprocessableEntity));
+      expect(
+        response.headers[HttpHeaders.contentTypeHeader],
+        equals('application/problem+json'),
+      );
+      expect(data['instance'], equals('http://localhost:8080/bad-request'));
+    });
+
+    test('should handle BadRequest with XML format', () async {
+      final badRequest = BadRequest(
+        'about:blank',
+        'Invalid input',
+        'The provided data is invalid',
+        HttpStatus.unprocessableEntity,
+        'http://localhost:8080/bad-request',
+      );
+
+      final response = generateResponse(
+        Request(
+          'GET',
+          Uri.parse('http://localhost:8080/bad-request'),
+          headers: {
+            HttpHeaders.acceptHeader: 'application/xml',
+          },
+        ),
+        badRequest,
+      );
+
+      expect(response.statusCode, HttpStatus.unprocessableEntity);
+
+      final body = await response.readAsString();
+      final transformer = Xml2Json()..parse(body);
+      final data = json.decode(transformer.toParker())['BadRequest'];
+
+      expect(data['type'], equals('about:blank'));
+      expect(data['title'], equals('Invalid input'));
+      expect(data['details'], equals('The provided data is invalid'));
+      expect(data['status'], equals('422'));
+      expect(
+        response.headers[HttpHeaders.contentTypeHeader],
+        equals('application/problem+xml'),
+      );
+      expect(data['instance'], equals('http://localhost:8080/bad-request'));
+    });
+  });
 }
