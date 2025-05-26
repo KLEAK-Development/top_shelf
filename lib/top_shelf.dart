@@ -7,9 +7,11 @@ export 'package:top_shelf/src/internal/network_object.dart';
 export 'package:top_shelf/src/internal/provider.dart';
 export 'package:top_shelf/src/internal/request.dart';
 
+export 'package:top_shelf/src/middlewares/request_logger.dart';
 export 'package:top_shelf/src/middlewares/allowed_content_type.dart';
 export 'package:top_shelf/src/middlewares/auth.dart';
 export 'package:top_shelf/src/middlewares/body_validator.dart';
+export 'package:top_shelf/src/middlewares/cloud_logger.dart';
 export 'package:top_shelf/src/middlewares/cookies_manager.dart';
 export 'package:top_shelf/src/middlewares/cors.dart';
 export 'package:top_shelf/src/middlewares/get_body.dart';
