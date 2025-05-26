@@ -17,6 +17,7 @@ export 'package:top_shelf/src/middlewares/parse_body.dart';
 export 'package:top_shelf/src/middlewares/provide_path_param.dart';
 export 'package:top_shelf/src/middlewares/query_parameter_validator.dart';
 export 'package:top_shelf/src/middlewares/rate_limiter.dart';
+export 'package:top_shelf/src/middlewares/response_cache.dart';
 export 'package:top_shelf/src/middlewares/session_manager.dart';
 
 export 'package:top_shelf/src/services/accounts/router/accounts.dart';
