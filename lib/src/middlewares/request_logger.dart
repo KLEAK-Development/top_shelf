@@ -7,11 +7,11 @@ import 'package:logging/logging.dart';
 import 'package:shelf/shelf.dart';
 
 /// Log levels for the request logger
-/// 
+///
 /// Determines the minimum severity level for log entries to be processed.
 /// Log levels are hierarchical - setting a minimum level will include all
 /// higher severity levels.
-/// 
+///
 /// - [debug]: Verbose logging for development and troubleshooting
 /// - [info]: General information about request/response flow
 /// - [warning]: Non-critical issues like 4xx status codes
@@ -24,15 +24,15 @@ enum RequestLogLevel {
 }
 
 /// Structured log entry containing comprehensive request/response information
-/// 
+///
 /// Each log entry represents a single HTTP request, response, or error event
 /// with detailed metadata for debugging and monitoring purposes.
-/// 
+///
 /// Example JSON output:
 /// ```json
 /// {
 ///   "id": "1672531200000_123",
-///   "timestamp": "2024-01-01T12:00:00.000Z", 
+///   "timestamp": "2024-01-01T12:00:00.000Z",
 ///   "level": "info",
 ///   "method": "GET",
 ///   "path": "/api/users",
@@ -100,24 +100,24 @@ class LogEntry {
 }
 
 /// Abstract logger interface for extensibility
-/// 
+///
 /// Implement this interface to create custom logging destinations.
 /// The logger receives structured [LogEntry] objects and can process
 /// them however needed (console, file, network, database, etc.).
-/// 
+///
 /// Example implementation:
 /// ```dart
 /// class FileLogger implements RequestLogger {
 ///   final File _file;
-///   
+///
 ///   FileLogger(String path) : _file = File(path);
-///   
+///
 ///   @override
 ///   Future<void> log(LogEntry entry) async {
-///     await _file.writeAsString('${jsonEncode(entry.toJson())}\n', 
+///     await _file.writeAsString('${jsonEncode(entry.toJson())}\n',
 ///                               mode: FileMode.append);
 ///   }
-///   
+///
 ///   @override
 ///   Future<void> flush() async {
 ///     // File system handles flushing automatically
@@ -126,28 +126,28 @@ class LogEntry {
 /// ```
 abstract class RequestLogger {
   /// Log a single entry
-  /// 
+  ///
   /// This method should be fast and non-blocking. For network loggers,
   /// consider buffering entries and sending them in batches.
   Future<void> log(LogEntry entry);
-  
+
   /// Flush any buffered log entries
-  /// 
+  ///
   /// Called periodically and when the application shuts down to ensure
   /// all log entries are properly persisted.
   Future<void> flush();
 }
 
 /// Console logger implementation for development and debugging
-/// 
+///
 /// Outputs structured JSON log entries to stdout using the standard
 /// Dart logging framework. Log levels map to appropriate severity levels.
-/// 
+///
 /// This logger is ideal for:
 /// - Local development
 /// - Docker containers with log aggregation
 /// - Simple debugging scenarios
-/// 
+///
 /// Example usage:
 /// ```dart
 /// final middleware = requestLogger(
@@ -184,17 +184,17 @@ class ConsoleLogger implements RequestLogger {
 }
 
 /// HTTP logger for sending logs to external services
-/// 
+///
 /// Buffers log entries and sends them in batches to an HTTP endpoint.
 /// Designed for cloud logging services, monitoring platforms, and
 /// custom log aggregation systems.
-/// 
+///
 /// Features:
 /// - Automatic batching for efficiency
 /// - Configurable buffer size and flush intervals
 /// - Error resilience with retry logic
 /// - Custom headers for authentication
-/// 
+///
 /// Example usage:
 /// ```dart
 /// final logger = HttpLogger(
@@ -204,7 +204,7 @@ class ConsoleLogger implements RequestLogger {
 ///   flushInterval: Duration(seconds: 30),
 /// );
 /// ```
-/// 
+///
 /// The logger sends POST requests with this payload structure:
 /// ```json
 /// {
@@ -287,11 +287,11 @@ class HttpLogger implements RequestLogger {
 }
 
 /// Composite logger for multiple destinations
-/// 
+///
 /// Forwards log entries to multiple logger implementations simultaneously.
 /// Useful for hybrid setups where you want both immediate console output
 /// and persistent remote logging.
-/// 
+///
 /// Example usage:
 /// ```dart
 /// final logger = CompositeLogger([
@@ -300,7 +300,7 @@ class HttpLogger implements RequestLogger {
 ///   FileLogger('/var/log/api.log'), // For local backup
 /// ]);
 /// ```
-/// 
+///
 /// All loggers receive the same log entries concurrently.
 /// If one logger fails, others continue operating normally.
 class CompositeLogger implements RequestLogger {
@@ -320,15 +320,15 @@ class CompositeLogger implements RequestLogger {
 }
 
 /// Privacy configuration for sensitive data handling
-/// 
+///
 /// Controls how sensitive information is masked or excluded from logs
 /// to comply with privacy regulations and security best practices.
-/// 
+///
 /// Default configuration masks common sensitive patterns:
 /// - Authorization headers, cookies, API keys
 /// - Password, token, and secret query parameters
 /// - Uses '***MASKED***' as the replacement value
-/// 
+///
 /// Example custom configuration:
 /// ```dart
 /// const privacyConfig = PrivacyConfig(
@@ -366,13 +366,13 @@ class PrivacyConfig {
 }
 
 /// Request logging middleware for comprehensive HTTP request/response monitoring
-/// 
+///
 /// This middleware captures detailed information about HTTP requests and responses,
 /// including timing, headers, bodies, errors, and custom metadata. It supports
 /// multiple logger implementations and comprehensive privacy controls.
-/// 
+///
 /// ## Basic Usage
-/// 
+///
 /// ```dart
 /// // Simple console logging
 /// final handler = Pipeline()
@@ -381,9 +381,9 @@ class PrivacyConfig {
 ///     ))
 ///     .addHandler(myHandler);
 /// ```
-/// 
+///
 /// ## Advanced Configuration
-/// 
+///
 /// ```dart
 /// final handler = Pipeline()
 ///     .addMiddleware(requestLogger(
@@ -407,29 +407,29 @@ class PrivacyConfig {
 ///     ))
 ///     .addHandler(myHandler);
 /// ```
-/// 
+///
 /// ## Performance Considerations
-/// 
+///
 /// - Set appropriate [minLevel] to reduce log volume in production
 /// - Avoid logging request/response bodies in high-traffic scenarios
 /// - Use [excludePaths] to skip health checks and metrics endpoints
 /// - For [HttpLogger], tune [maxBufferSize] and [flushInterval] based on your needs
-/// 
+///
 /// ## Privacy & Security
-/// 
+///
 /// - Always configure [privacyConfig] for production deployments
 /// - Review sensitive headers and query parameters for your use case
-/// - Consider disabling body logging ([logRequestBody], [logResponseBody]) 
+/// - Consider disabling body logging ([logRequestBody], [logResponseBody])
 /// - Test your privacy configuration with real requests
-/// 
+///
 /// ## Error Handling
-/// 
+///
 /// - Errors in handlers are logged with full stack traces
 /// - Original exceptions are re-thrown after logging
 /// - Logger failures don't affect request processing
-/// 
+///
 /// ## Log Entry Structure
-/// 
+///
 /// Each log entry contains:
 /// - Unique request ID for correlation
 /// - Precise timestamps and response times
