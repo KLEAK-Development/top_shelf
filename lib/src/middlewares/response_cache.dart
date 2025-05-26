@@ -27,17 +27,17 @@ Middleware responseCache({
 
   String generateCacheKey(Request request) {
     final buffer = StringBuffer();
-    
+
     if (cacheKeyPrefix != null) {
       buffer.write('$cacheKeyPrefix:');
     }
-    
+
     buffer.write('${request.method}:${request.url.path}');
-    
+
     if (includeQueryParams && request.url.query.isNotEmpty) {
       buffer.write('?${request.url.query}');
     }
-    
+
     // Include vary headers in cache key for more granular caching
     for (final header in varyHeaders) {
       final value = request.headers[header.toLowerCase()];
@@ -45,7 +45,7 @@ Middleware responseCache({
         buffer.write(':$header=$value');
       }
     }
-    
+
     return base64Encode(utf8.encode(buffer.toString()));
   }
 
@@ -56,7 +56,8 @@ Middleware responseCache({
   void enforceMaxCacheSize() {
     if (cache.length > maxCacheSize) {
       // Remove oldest entries (simple FIFO eviction)
-      final keysToRemove = cache.keys.take(cache.length - maxCacheSize).toList();
+      final keysToRemove =
+          cache.keys.take(cache.length - maxCacheSize).toList();
       for (final key in keysToRemove) {
         cache.remove(key);
       }
@@ -71,7 +72,7 @@ Middleware responseCache({
       }
 
       final cacheKey = generateCacheKey(request);
-      
+
       // Clean up expired entries periodically
       cleanupExpiredEntries();
 
@@ -81,7 +82,8 @@ Middleware responseCache({
         // Return cached response with cache headers
         return cachedEntry.response.change(headers: {
           ...cachedEntry.response.headers,
-          HttpHeaders.cacheControlHeader: 'public, max-age=${cacheDuration.inSeconds}',
+          HttpHeaders.cacheControlHeader:
+              'public, max-age=${cacheDuration.inSeconds}',
           'X-Cache': 'HIT',
           'X-Cache-Key': cacheKey,
         });
@@ -94,7 +96,7 @@ Middleware responseCache({
       if (cacheableStatusCodes.contains(response.statusCode)) {
         // Create cache entry
         final expiresAt = clock.now().add(cacheDuration);
-        
+
         // Read response body for caching
         final body = await response.readAsString();
         final cachedResponse = Response(
@@ -102,9 +104,9 @@ Middleware responseCache({
           body: body,
           headers: response.headers,
         );
-        
+
         cache[cacheKey] = _CacheEntry(cachedResponse, expiresAt);
-        
+
         // Enforce cache size limit
         enforceMaxCacheSize();
 
@@ -114,10 +116,12 @@ Middleware responseCache({
           body: body,
           headers: {
             ...response.headers,
-            HttpHeaders.cacheControlHeader: 'public, max-age=${cacheDuration.inSeconds}',
+            HttpHeaders.cacheControlHeader:
+                'public, max-age=${cacheDuration.inSeconds}',
             'X-Cache': 'MISS',
             'X-Cache-Key': cacheKey,
-            if (varyHeaders.isNotEmpty) HttpHeaders.varyHeader: varyHeaders.join(', '),
+            if (varyHeaders.isNotEmpty)
+              HttpHeaders.varyHeader: varyHeaders.join(', '),
           },
         );
       }
