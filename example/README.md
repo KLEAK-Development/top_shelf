@@ -27,3 +27,7 @@ dart run bin/server.dart
 ```sh
 dart run --enable-vm-service bin/dev.dart
 ```
+
+## Request Logging
+
+The example includes the new request logging middleware with console output. The router in `lib/src/router.dart` includes a basic logging setup that prints structured JSON logs to the console for all requests and responses.

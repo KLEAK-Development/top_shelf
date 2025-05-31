@@ -36,6 +36,17 @@ Handler _getRouter() {
 
   return Pipeline()
       .addMiddleware(cors())
+      .addMiddleware(requestLogger(
+        logger: ConsoleLogger(),
+        logRequests: true,
+        logResponses: true,
+        logTiming: true,
+        // excludePaths: ['/'], // Exclude health check endpoint from logging
+        metadataExtractor: (request) => {
+          'service': 'top_shelf_example',
+          'version': '1.0.0',
+        },
+      ))
       .addMiddleware(openSqlite3Database(filename: 'database.db'))
       .addHandler(app.call);
 }
