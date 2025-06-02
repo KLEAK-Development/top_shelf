@@ -127,5 +127,5 @@ memoryRepo.clear(); // Reset for tests
 - Example application in `/example/` demonstrates proper usage patterns
 - Database setup required via `dart run tools/create_database.dart` in example
 - Hot reload available in development mode
-- In-memory repository available for testing: `AccountRepositoryFactory.createMemoryRepository()`
-- Wiki documentation at: https://github.com/sakemaer/top_shelf/wiki
+- In-memory repository available for testing: `AccountMemoryRepository()`
+- Wiki documentation at: https://github.com/KLEAK-Development/top_shelf/wiki
