@@ -15,6 +15,6 @@ Future<Response> handler(Request request) async {
     );
     return generateResponse(request, object);
   } on login.AccountNotFound catch (_) {
-    return Response(HttpStatus.notFound);
+    return Response(HttpStatus.unauthorized);
   }
 }
