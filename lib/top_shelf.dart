@@ -22,7 +22,16 @@ export 'package:top_shelf/src/middlewares/rate_limiter.dart';
 export 'package:top_shelf/src/middlewares/response_cache.dart';
 export 'package:top_shelf/src/middlewares/session_manager.dart';
 
+export 'package:top_shelf/src/services/common/repositories/crud_repository.dart';
+export 'package:top_shelf/src/services/common/repositories/sqlite_crud_repository.dart';
+
+export 'package:top_shelf/src/services/common/repositories/account/account_repository_interface.dart';
+export 'package:top_shelf/src/services/common/repositories/account/account_sqlite_repository.dart';
+export 'package:top_shelf/src/services/common/repositories/account/account_memory_repository.dart';
+
+export 'package:top_shelf/src/services/common/services/base_crud_service.dart';
+export 'package:top_shelf/src/services/common/services/account/account_service_interface.dart';
+export 'package:top_shelf/src/services/common/services/account/account_service.dart';
+
 export 'package:top_shelf/src/services/accounts/router/accounts.dart';
 export 'package:top_shelf/src/services/authentication/router/authentication.dart';
-export 'package:top_shelf/src/services/common/repositories/abstract.dart';
-export 'package:top_shelf/src/services/common/repositories/sqlite3.dart';

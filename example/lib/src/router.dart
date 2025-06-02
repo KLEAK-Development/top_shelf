@@ -15,15 +15,29 @@ Handler _getRouter() {
     ..mount(
       '/authentication',
       Pipeline()
-          .addMiddleware(provide<AAccountsRepository>(
-              (request) => SqliteAccountRepository(request.get<Database>())))
+          .addMiddleware(
+            provide<AccountServiceInterface>(
+              (request) => AccountService(
+                AccountSqliteRepository(
+                  request.get<Database>(),
+                ),
+              ),
+            ),
+          )
           .addHandler(authenticationModule),
     )
     ..mount(
       '/accounts',
       Pipeline()
-          .addMiddleware(provide<AAccountsRepository>(
-              (request) => SqliteAccountRepository(request.get<Database>())))
+          .addMiddleware(
+            provide<AccountServiceInterface>(
+              (request) => AccountService(
+                AccountSqliteRepository(
+                  request.get<Database>(),
+                ),
+              ),
+            ),
+          )
           .addHandler(accountsModule()),
     )
     ..mount('/todos', todos)
@@ -41,7 +55,8 @@ Handler _getRouter() {
         logRequests: true,
         logResponses: true,
         logTiming: true,
-        // excludePaths: ['/'], // Exclude health check endpoint from logging
+        logRequestBody: true,
+        logResponseBody: true,
         metadataExtractor: (request) => {
           'service': 'top_shelf_example',
           'version': '1.0.0',

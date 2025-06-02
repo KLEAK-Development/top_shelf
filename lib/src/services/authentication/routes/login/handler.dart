@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:shelf/shelf.dart';
 import 'package:top_shelf/src/internal/generate_response.dart';
 import 'package:top_shelf/src/internal/request.dart';
 import 'package:top_shelf/src/services/authentication/routes/login/models/login.dart';
 import 'package:top_shelf/src/services/authentication/routes/login/login.dart'
     as login;
-import 'package:top_shelf/src/services/common/repositories/abstract.dart';
 
 Future<Response> handler(Request request) async {
   try {
@@ -15,7 +12,7 @@ Future<Response> handler(Request request) async {
       request.get<Login>(),
     );
     return generateResponse(request, object);
-  } on AccountNotFound catch (_) {
-    return Response(HttpStatus.notFound);
+  } on login.AccountNotFound catch (_) {
+    return Response.unauthorized('');
   }
 }

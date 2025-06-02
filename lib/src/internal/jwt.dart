@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 
-String _defaultJwtSecretKeyFactory() {
+String defaultJwtSecretKeyFactory() {
   final secretKey = Platform.environment['JWT_SECRET_KEY'];
   if (secretKey == null) {
     throw Exception("JWT_SECRET_KEY environment variable is not set");
@@ -18,10 +18,10 @@ class JsonWebToken {
   Map<String, dynamic> _header = {"alg": "HS256", "typ": "JWT"};
   Map<String, dynamic> _payload = {};
 
-  JsonWebToken({this.secretKeyFactory = _defaultJwtSecretKeyFactory});
+  JsonWebToken({this.secretKeyFactory = defaultJwtSecretKeyFactory});
 
-  JsonWebToken.parse(String jwt)
-      : secretKeyFactory = _defaultJwtSecretKeyFactory {
+  JsonWebToken.parse(String jwt, {String Function()? secretKeyFactory})
+      : secretKeyFactory = secretKeyFactory ?? defaultJwtSecretKeyFactory {
     _jwt = jwt;
     final parts = jwt.split('.');
 
@@ -32,9 +32,10 @@ class JsonWebToken {
     _payload = json.decode(utf8.decode(base64Url.decode(encodedPayload)));
   }
 
-  String get sub => _payload['sub'];
-  String get iat => _payload['iat'];
-  String get exp => _payload['exp'];
+  String? get sub => _payload['sub'];
+  String? get iat => _payload['iat'];
+  String? get exp => _payload['exp'];
+  String get jwt => _jwt;
 
   Map<String, dynamic> get payload => _payload;
 

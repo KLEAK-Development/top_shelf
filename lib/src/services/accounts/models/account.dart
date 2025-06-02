@@ -1,6 +1,7 @@
 import 'package:top_shelf/top_shelf.dart';
 
-class Account implements NetworkObjectToJson {
+class Account implements NetworkObjectToJson, Entity {
+  @override
   final int id;
   final String email;
   final String password;
@@ -50,7 +51,7 @@ class Account implements NetworkObjectToJson {
     return {
       'id': id,
       'email': email,
-      'creationDate': creationDate.toIso8601String(),
+      'creationDate': creationDate.toUtc().toIso8601String(),
       'roles': roles,
     };
   }
