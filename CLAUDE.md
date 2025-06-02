@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Common Commands
 
 ### Development
+
 ```bash
 # Get dependencies
 dart pub get
@@ -26,6 +27,7 @@ dart format lib/ test/
 ```
 
 ### Example Application
+
 ```bash
 # Navigate to example directory
 cd example/
@@ -45,17 +47,20 @@ dart run --enable-vm-service bin/dev.dart
 Top Shelf is a Dart package providing helpers, middleware, and architectural patterns for `shelf` HTTP servers. It implements clean architecture with distinct layers:
 
 ### Core Layers
+
 - **Handlers/Routes**: HTTP endpoint implementations
 - **Services**: Business logic layer with validation hooks (`BaseService<T, ID>`)
 - **Repositories**: Data access layer (`CrudRepository<T, ID>`, SQLite implementations)
 - **Middleware**: Cross-cutting concerns (auth, logging, CORS, validation, etc.)
 
 ### Key Services
+
 - **Account Service**: User management with PBKDF2 password hashing and role-based access
 - **Authentication Service**: JWT-based auth with login/refresh token flow
 - **Repository Pattern**: Generic CRUD operations with SQLite3 backend
 
 ### Important Patterns
+
 - **Dependency Injection**: Services provided via `provide<T>()` middleware
 - **Module Organization**: Routes organized by feature and mounted to main router
 - **Middleware Pipelines**: Layered middleware application using `Pipeline()`
@@ -72,6 +77,7 @@ Top Shelf is a Dart package providing helpers, middleware, and architectural pat
 ## Testing
 
 Tests are organized in `/test/` with patterns for:
+
 - Internal utilities (`/test/internal/`)
 - Middleware components (`/test/middlewares/`)
 - Service layer (`/test/services/`)
@@ -92,7 +98,7 @@ For testing and development without database setup, use the in-memory account re
 
 ```dart
 // Create in-memory repository
-final repository = AccountRepositoryFactory.createMemoryRepository();
+final repository = AccountMemoryRepository();
 final accountService = AccountService(repository, pepperFactory: testPepperFactory);
 
 // Full CRUD operations available
@@ -108,6 +114,7 @@ memoryRepo.clear(); // Reset for tests
 ```
 
 **Features:**
+
 - Complete AccountRepositoryInterface implementation
 - Email uniqueness enforcement
 - Role management (add/remove roles)

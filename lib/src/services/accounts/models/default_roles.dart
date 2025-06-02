@@ -1,3 +1,3 @@
 typedef RolesType = List<String>;
 
-const defaultRoles = ['user'];
+const defaultRoles = ['admin', 'user'];

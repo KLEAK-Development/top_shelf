@@ -7,6 +7,10 @@ import 'package:top_shelf/src/services/accounts/routes/create_account/middleware
     as create_account;
 import 'package:top_shelf/src/services/accounts/routes/create_account/handler.dart'
     as create_account;
+import 'package:top_shelf/src/services/accounts/routes/change_password/middleware.dart'
+    as change_password;
+import 'package:top_shelf/src/services/accounts/routes/change_password/handler.dart'
+    as change_password;
 
 Handler accountsModule({List<String> roles = defaultRoles}) {
   return Pipeline()
@@ -18,6 +22,12 @@ Handler accountsModule({List<String> roles = defaultRoles}) {
                 Pipeline()
                     .addMiddleware(create_account.middleware())
                     .addHandler(create_account.handler),
+              )
+              ..put(
+                '/change-password',
+                Pipeline()
+                    .addMiddleware(change_password.middleware())
+                    .addHandler(change_password.handler),
               ))
             .call),
       );

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:shelf/shelf.dart';
 import 'package:top_shelf/src/internal/generate_response.dart';
 import 'package:top_shelf/src/internal/request.dart';
@@ -15,6 +13,6 @@ Future<Response> handler(Request request) async {
     );
     return generateResponse(request, object);
   } on login.AccountNotFound catch (_) {
-    return Response(HttpStatus.unauthorized);
+    return Response.unauthorized('');
   }
 }
