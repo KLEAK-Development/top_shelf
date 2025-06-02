@@ -18,7 +18,7 @@ Handler _getRouter() {
           .addMiddleware(
             provide<AccountServiceInterface>(
               (request) => AccountService(
-                AccountRepositoryFactory.createSqliteRepository(
+                AccountSqliteRepository(
                   request.get<Database>(),
                 ),
               ),
@@ -32,7 +32,7 @@ Handler _getRouter() {
           .addMiddleware(
             provide<AccountServiceInterface>(
               (request) => AccountService(
-                AccountRepositoryFactory.createSqliteRepository(
+                AccountSqliteRepository(
                   request.get<Database>(),
                 ),
               ),

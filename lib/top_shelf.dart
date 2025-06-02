@@ -28,7 +28,6 @@ export 'package:top_shelf/src/services/common/repositories/sqlite_crud_repositor
 export 'package:top_shelf/src/services/common/repositories/account/account_repository_interface.dart';
 export 'package:top_shelf/src/services/common/repositories/account/account_sqlite_repository.dart';
 export 'package:top_shelf/src/services/common/repositories/account/account_memory_repository.dart';
-export 'package:top_shelf/src/services/common/repositories/account/account_repository_factory.dart';
 
 export 'package:top_shelf/src/services/common/services/base_crud_service.dart';
 export 'package:top_shelf/src/services/common/services/account/account_service_interface.dart';
