@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:top_shelf/src/services/common/repositories/account/account_repository_factory.dart';
+import 'package:top_shelf/src/services/common/repositories/account/account_memory_repository.dart';
 
 import 'shared_account_service_tests.dart';
 
@@ -8,7 +8,7 @@ void main() {
     // Run all shared integration tests
     runAccountIntegrationTests(
       () async {
-        return AccountRepositoryFactory.createMemoryRepository();
+        return AccountMemoryRepository();
       },
     );
   });

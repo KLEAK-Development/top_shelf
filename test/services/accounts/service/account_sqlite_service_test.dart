@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:sqlite3/sqlite3.dart';
-import 'package:top_shelf/src/services/common/repositories/account/account_repository_factory.dart';
+import 'package:top_shelf/src/services/common/repositories/account/account_sqlite_repository.dart';
 
 import 'shared_account_service_tests.dart';
 
@@ -21,7 +21,7 @@ void main() {
             roles TEXT NOT NULL DEFAULT 'user'
           )
         ''');
-        return AccountRepositoryFactory.createSqliteRepository(database);
+        return AccountSqliteRepository(database);
       },
       () async {
         database.dispose();
